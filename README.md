@@ -27,4 +27,12 @@ Users can upvote and downvote the answers and select one as an accepted answer.
 
 ## Technologies
 
-TBD
+* Front-end technology
+-HTML
+-CSS(Bootstrap)
+-Javascript
+
+
+* Back-end technology
+-ASP.net Core MVC
+
