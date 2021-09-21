@@ -27,12 +27,11 @@ Users can upvote and downvote the answers and select one as an accepted answer.
 
 ## Technologies
 
-* Front-end technology
--HTML
--CSS(Bootstrap)
--Javascript
+### Front-end technology
+* HTML
+* CSS(Bootstrap)
+* Javascript
 
-
-* Back-end technology
--ASP.net Core MVC
+### Back-end technology
+* ASP.net Core MVC
 
