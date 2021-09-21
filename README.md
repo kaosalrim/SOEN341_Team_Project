@@ -33,6 +33,6 @@ Users can upvote and downvote the answers and select one as an accepted answer.
 -Javascript
 
 
-* Front-end technology
+* Back-end technology
 -ASP.net Core MVC
 
