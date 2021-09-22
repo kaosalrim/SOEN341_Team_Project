@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\artem\\source\\repos\\SOEN341_Team_Project\\Q_A_WEB\\Q_A_WEB\\Q_A_WEB.csproj": {}
+    "C:\\Users\\artem\\Source\\Repos\\SOEN341_Team_Project\\Q_A_WEB\\Q_A_WEB\\Q_A_WEB.csproj": {}
   },
   "projects": {
-    "C:\\Users\\artem\\source\\repos\\SOEN341_Team_Project\\Q_A_WEB\\Q_A_WEB\\Q_A_WEB.csproj": {
+    "C:\\Users\\artem\\Source\\Repos\\SOEN341_Team_Project\\Q_A_WEB\\Q_A_WEB\\Q_A_WEB.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\artem\\source\\repos\\SOEN341_Team_Project\\Q_A_WEB\\Q_A_WEB\\Q_A_WEB.csproj",
+        "projectUniqueName": "C:\\Users\\artem\\Source\\Repos\\SOEN341_Team_Project\\Q_A_WEB\\Q_A_WEB\\Q_A_WEB.csproj",
         "projectName": "Q_A_WEB",
-        "projectPath": "C:\\Users\\artem\\source\\repos\\SOEN341_Team_Project\\Q_A_WEB\\Q_A_WEB\\Q_A_WEB.csproj",
+        "projectPath": "C:\\Users\\artem\\Source\\Repos\\SOEN341_Team_Project\\Q_A_WEB\\Q_A_WEB\\Q_A_WEB.csproj",
         "packagesPath": "C:\\Users\\artem\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\artem\\source\\repos\\SOEN341_Team_Project\\Q_A_WEB\\Q_A_WEB\\obj\\",
+        "outputPath": "C:\\Users\\artem\\Source\\Repos\\SOEN341_Team_Project\\Q_A_WEB\\Q_A_WEB\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Microsoft\\Xamarin\\NuGet\\",
