@@ -28,6 +28,7 @@ Users can upvote and downvote the answers and select one as an accepted answer.
 ## Technologies
 
 ### Front-end technology
+* Angular
 * HTML
 * CSS(Bootstrap)
 * Javascript
