@@ -21,7 +21,7 @@ Users can upvote and downvote the answers and select one as an accepted answer.
 * Jordan Joseph ([Josephj9720](https://github.com/Josephj9720 "Github user's profile"))
 * Daniel Chin-Bellemare ([isleepontree10](https://github.com/isleepontree10 "Github user's profile"))
 * Hussein Olleik ([HAOlleik](https://github.com/HAOlleik "Github user's profile"))
-* Gulnoor Kaur
+* Gulnoor Kaur([gul2223](https://github.com/gul2223 "Github user's profile"))
 * Kamar Kibbi ([kamarkibbi](https://github.com/kamarkibbi "Github user's profile"))
 * Ayeshah Rehman
 
