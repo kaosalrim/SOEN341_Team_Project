@@ -37,4 +37,4 @@ Users can upvote and downvote the answers and select one as an accepted answer.
 * ASP.net Core MVC
 * C#
 * Entity Framework
-* SQL
+* SQL (Microsoft SQL Server)
