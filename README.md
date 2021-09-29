@@ -5,7 +5,7 @@ Design a Q&A style website. A simplified version of StackOverflow
 
 ## Project
 
-This web application allows people to share knowledge by asking and answering questions. The user can submit a question and another user(s) can post their answer(s).
+This web application allows people to share knowledge by asking and answering questions. The user can submit a question and other user(s) can post their answer(s).
 Users can upvote and downvote the answers and select one as an accepted answer.
 
 ## Core features
