@@ -21,7 +21,5 @@ namespace API.DTOs
         public string LastName { get; set; }
         [Required]
         public string Email { get; set; }
-        [Required]
-        public DateTime DateJoined { get; set; }
     }
 }

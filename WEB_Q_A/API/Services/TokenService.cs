@@ -1,10 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
 using System.Security.Claims;
 using System.Text;
-using System.Threading.Tasks;
 using API.Entities;
 using API.Interfaces;
 using Microsoft.Extensions.Configuration;
@@ -22,7 +20,7 @@ namespace API.Services
         {
             _key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config["TokenKey"]));
         }
-        public string CreateToken(AppUser user)
+        public string CreateToken(ApplicationUser user)
         {
             // create claims 
             var claims = new List<Claim>{

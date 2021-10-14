@@ -9,6 +9,7 @@ using Microsoft.Extensions.Configuration;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
 
 namespace API.Controllers
 {
@@ -24,7 +25,8 @@ namespace API.Controllers
             this.SignInManager = SignInManager;
             this._config = config;
         }
-        
+
+        [Authorize]
         [HttpGet]
         [Route("id")]
         //Get = api/users/id
@@ -32,15 +34,14 @@ namespace API.Controllers
         public async Task<object> GetUsers(string id)
         {
             var user = await UserManager.FindByIdAsync(id);
-            if (user == null)
-            {
-                return BadRequest();
-            }
+            if (user == null) return BadRequest();
+            
             ClientUser c1 = new ClientUser();
             c1.username = user.UserName;
             return c1;
         }
 
+        [Authorize]
         [HttpGet]
         [Route("Logout")]
         public async void Logout()
@@ -56,58 +57,40 @@ namespace API.Controllers
         public async Task<Object> LogIn(LoginDataDto loginDto)
         {
             var user = await UserManager.FindByNameAsync(loginDto.UserName);
-            if (user == null)
-            {
-                return BadRequest();
-            }
+            if (user == null) return BadRequest();
+
             var result = await SignInManager.CheckPasswordSignInAsync(user, loginDto.Password, false);
 
-            if (!result.Succeeded)
-            {
-
-                return BadRequest(result);
-            }
+            if (!result.Succeeded) return BadRequest(result);
 
             var claims = new List<Claim>();
             claims.Add(new Claim("username", loginDto.UserName));
             claims.Add(new Claim("email", user.Email));
             claims.Add(new Claim("FirstName", user.FirstName));
             claims.Add(new Claim("LastName", user.LastName));
-            claims.Add(new Claim("DateJoined", user.DateJoined));
+            claims.Add(new Claim("DateJoined", user.DateJoined.ToString("s")));
             var claimIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
             var claimPrincipal = new ClaimsPrincipal(claimIdentity);
             await HttpContext.SignInAsync(claimPrincipal);
-            return Ok(new
-            {
-                result = result
-            }); ; ; ; ; ; ; ; ;
+            return Ok(new { result = result });
         }
 
         [HttpPost]
         [Route("Register")]
         //POST = api/users/Register
-        public async Task<object> PostApplicationUser(AppUser model)
+        public async Task<object> PostApplicationUser(RegisterDto model)
         {
             var applicationUser = new ApplicationUser()
             {
-                UserName = model.UserName,
+                UserName = model.Username,
                 Email = model.Email,
-                FirstName = model.FirstName,
+                FirstName = model.FristName,
                 LastName = model.LastName,
-                DateJoined = model.DateJoined
+                DateJoined = DateTime.Now,
             };
-            try
-            {
-                var result = await UserManager.CreateAsync(applicationUser, model.Password);
-                return Ok(result);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
 
+            var result = await UserManager.CreateAsync(applicationUser, model.Password);
+            return Ok(result);
         }
-
-
     }
 }
