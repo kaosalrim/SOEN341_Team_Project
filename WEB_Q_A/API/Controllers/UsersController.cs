@@ -1,27 +1,18 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using API.Data;
 using System;
 using API.Entities;
+using API.DTOs;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using API.Model;
-using Microsoft.EntityFrameworkCore;
-using System.Diagnostics;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Configuration;
 using System.Security.Claims;
-using Microsoft.IdentityModel.Tokens;
-using System.Text;
-using System.IdentityModel.Tokens.Jwt;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication;
 
 namespace API.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class UsersController : ControllerBase
+    public class UsersController : BaseApiController
     {
         private readonly UserManager<ApplicationUser> UserManager;
         private readonly IConfiguration _config;
@@ -33,6 +24,7 @@ namespace API.Controllers
             this.SignInManager = SignInManager;
             this._config = config;
         }
+        
         [HttpGet]
         [Route("id")]
         //Get = api/users/id
@@ -48,34 +40,36 @@ namespace API.Controllers
             c1.username = user.UserName;
             return c1;
         }
+
         [HttpGet]
         [Route("Logout")]
         public async void Logout()
         {
             await HttpContext.SignOutAsync();
-        
+
         }
+
         [HttpPost]
         [Route("Login")]
         //Post request for login 
         //api/users/Login
-        public async Task<Object> LogIn(LoginData model)
+        public async Task<Object> LogIn(LoginDataDto loginDto)
         {
-            var user = await UserManager.FindByNameAsync(model.UserName);
+            var user = await UserManager.FindByNameAsync(loginDto.UserName);
             if (user == null)
             {
                 return BadRequest();
             }
-            var result = await SignInManager.CheckPasswordSignInAsync(user, model.Password, false);
+            var result = await SignInManager.CheckPasswordSignInAsync(user, loginDto.Password, false);
 
             if (!result.Succeeded)
             {
-                
+
                 return BadRequest(result);
             }
-            
+
             var claims = new List<Claim>();
-            claims.Add(new Claim("username", model.UserName));
+            claims.Add(new Claim("username", loginDto.UserName));
             claims.Add(new Claim("email", user.Email));
             claims.Add(new Claim("FirstName", user.FirstName));
             claims.Add(new Claim("LastName", user.LastName));
@@ -86,13 +80,16 @@ namespace API.Controllers
             return Ok(new
             {
                 result = result
-            }); ; ; ; ;; ; ; ;
+            }); ; ; ; ; ; ; ; ;
         }
+
         [HttpPost]
         [Route("Register")]
         //POST = api/users/Register
-        public async Task<object> PostApplicationUser(AppUser model) {
-            var applicationUser = new ApplicationUser() {
+        public async Task<object> PostApplicationUser(AppUser model)
+        {
+            var applicationUser = new ApplicationUser()
+            {
                 UserName = model.UserName,
                 Email = model.Email,
                 FirstName = model.FirstName,
@@ -104,11 +101,11 @@ namespace API.Controllers
                 var result = await UserManager.CreateAsync(applicationUser, model.Password);
                 return Ok(result);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw ex;
             }
-           
+
         }
 
 
