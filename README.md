@@ -30,7 +30,7 @@ Users can upvote and downvote the answers and select one as an accepted answer.
 ### Front-end technology
 * Angular
 * HTML
-* CSS(Bootstrap)
+* CSS-(Bootstrap)
 * Javascript
 
 ### Back-end technology
