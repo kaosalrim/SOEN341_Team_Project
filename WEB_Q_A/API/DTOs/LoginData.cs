@@ -4,9 +4,9 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace API.Model
+namespace API.DTOs
 {
-    public class LoginData
+    public class LoginDataDto
     {
         [Required(ErrorMessage = "Please Enter the Email Id")]
         [Display (Name = "UserName")]

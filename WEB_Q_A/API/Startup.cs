@@ -9,9 +9,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using API.Entities;
+
 namespace API
 {
     public class Startup
@@ -56,21 +56,7 @@ namespace API
             builder.AddEntityFrameworkStores<DataContext>();
 
             builder.AddSignInManager<SignInManager<ApplicationUser>>();
-            /*
-            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-               .AddJwtBearer(options =>
-               {
-                   options.TokenValidationParameters = new TokenValidationParameters
-                   {
-                       ValidateIssuerSigningKey = true,
-                       IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII
-                             .GetBytes(_config.GetSection("AppSettings:key").Value)),
-                       ValidateIssuer = false,
-                       ValidateAudience = false
-                   };
-
-               });
-            */
+            
             services.AddControllers();
             services.AddCors();
             services.AddIdentityServices(_config);
