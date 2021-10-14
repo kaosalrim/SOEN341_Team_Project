@@ -19,8 +19,8 @@ namespace API.Entities
         [Required]
         public int UserId { get; set; }
 
-        public virtual Question Question { get; set; }
+        public Question Question { get; set; }
        
-        public virtual AppUser User  { get; set; }
+        public ApplicationUser User  { get; set; }
     }
 }

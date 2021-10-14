@@ -17,7 +17,7 @@ namespace API.Entities
         [StringLength(20), ErrorMessage = "No User Id length is more than 20 characters!"]
         public int UserId { get; set; }
        
-        public virtual AppUser User { get; set; }
+        public ApplicationUser User { get; set; }
 
     }
 }
