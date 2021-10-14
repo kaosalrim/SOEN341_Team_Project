@@ -3,9 +3,8 @@
     "",
     "\\WEB_Q_A",
     "\\WEB_Q_A\\API",
-    "\\WEB_Q_A\\API\\Entities",
-    "\\WEB_Q_A\\client\\src"
+    "\\WEB_Q_A\\API\\Entities"
   ],
-  "SelectedNode": "\\WEB_Q_A\\WEB_Q_A.sln",
+  "SelectedNode": "\\WEB_Q_A\\API\\Entities\\AppUser.cs",
   "PreviewInSolutionExplorer": false
 }
