@@ -1,16 +1,12 @@
 {
   "ExpandedNodes": [
-<<<<<<< HEAD
     "",
     "\\WEB_Q_A",
     "\\WEB_Q_A\\API",
     "\\WEB_Q_A\\API\\Entities"
   ],
   "SelectedNode": "\\WEB_Q_A\\API\\Entities\\AppUser.cs",
-=======
     ""
   ],
-  "SelectedNode": "\\WEB_Q_A.sln",
->>>>>>> main
   "PreviewInSolutionExplorer": false
 }
