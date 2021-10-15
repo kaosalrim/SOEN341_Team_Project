@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace API.Entities
 {
-    public Answer
+    public class AnswerModel
     {
         [Key]
         public int Id { get; set; }
@@ -19,7 +19,7 @@ namespace API.Entities
         [Required]
         public int UserId { get; set; }
 
-        public Question Question { get; set; }
+        public QuestionModel Question { get; set; }
        
         public ApplicationUser User  { get; set; }
     }
