@@ -16,5 +16,13 @@ namespace API.Data
         }
 
         public DbSet<ApplicationUser> User{ get; set; }
+
+        public DbSet<QuestionModel> Question{ get; set; }
+
+        public DbSet<AnswerModel> Answer{ get; set; }
+
+
+        //protected override void OnConfiguring(DbContextOptionsBuilder options)
+            //=> options.UseSqlite(@"Data Source=D:\Desktop\uni\fall 2021\soen 341\StackOverFlow\StackOverFlowDB");
     }
 }
