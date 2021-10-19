@@ -1,1 +1,42 @@
-<p>Question-detail works!</p>
+<div class="container-fluid"  *ngIf="question">
+    <div class="col d-flex justify-content-end" style="padding-right: 5%;padding-bottom: 20px;">
+        <button *ngIf="user" class="btn btn-outline-primary" routerLink='/question/create'>Ask a question</button>
+        <button *ngIf="!user" class="btn btn-outline-primary" routerLink='/register'>Ask a question</button>
+    </div>
+    <div class="card-deck"  style="padding-right: 5%;">
+        <div class="row">
+            <div class="card">
+                    <div class="card-body">
+                        <h3 class="card-title">{{ question.questionTitle }}</h3>
+                        <p class="card-text">{{ question.questionDetails }}</p>
+                        <p class="card-text"><small class="text-muted">Posted on: {{ question.datePosted   | date:'yyyy-MM-dd' }}</small></p>                
+                        <span class="mr-2">Posted by: <img src="{{ photo?.url || './assets/user.png' }}" alt="" width="32" height="32" routerLink='/users/{{ question.username}}'/> 
+                            <span class="ml-2 custom-link" routerLink='/users/{{ question.username}}'>{{question.username}}</span>
+                        </span>                
+                        <small class="text-muted">Reputation score: {{ rep }}</small>
+                    </div>
+            </div>
+        </div>
+        <div class="row" style="width: 100%;">
+                <hr class="custom" />
+            <h3>{{ question?.answers?.length }} Answers</h3>
+        </div>
+
+        <div class="row">
+            <div class="card-deck answers-deck">
+                <ng-container *ngFor="let answer of question.answers" >
+                    <app-answer-card [answer]="answer"></app-answer-card>
+                </ng-container>
+                
+            </div>
+        </div>
+        <ng-container *ngIf="user">
+            <div class="row" style="width: 100%;">
+                <hr class="custom" />
+                <h3>Your answer</h3>
+                <app-answer-create [questionId]="question.id"></app-answer-create>
+            </div>
+        </ng-container>
+        
+    </div>
+</div>

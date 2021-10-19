@@ -1,9 +1,5 @@
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using API.Data;
-using API.Entities;
+using API.Helpers;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace API.Controllers
 {
@@ -11,6 +7,7 @@ namespace API.Controllers
         Base controller class
         All controllers must inherit from this
     */
+    [ServiceFilter(typeof(LogUserActivity))]
     [ApiController]
     [Route("api/[controller]")]
     public class BaseApiController : ControllerBase

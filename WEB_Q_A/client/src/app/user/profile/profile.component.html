@@ -1,0 +1,68 @@
+<div class="row" *ngIf="member">
+    <div class="col-4">
+        <div class="card">
+            <img src="{{ member.photoUrl || './assets/user.png' }}" alt="user photo" class="card-img-top img-thumbnail">
+            <div class="card-body">
+                <div>
+                    <strong>Username: </strong>
+                    <p>{{member.username}}</p>
+                </div>
+                <div>
+                    <strong>Name: </strong>
+                    <p>{{member.firstName}} {{member.lastName}}</p>
+                </div>
+                <div>
+                    <strong>Member since: </strong>
+                    <p> 
+                        <span *ngIf="member.memberSince.years > 0">
+                            {{ member.memberSince.years }} year<span *ngIf="member.memberSince.years > 1">s</span>
+                        </span>
+                        <span *ngIf="member.memberSince.months > 0">
+                            {{ member.memberSince.months }} month<span *ngIf="member.memberSince.months > 1">s</span>
+                        </span>
+                        <span>
+                            {{ member.memberSince.days }} day<span *ngIf="member.memberSince.days > 1">s</span>
+                        </span>
+                    </p>
+                </div>
+                <div>
+                    <strong>Last active: </strong>
+                    <p>{{ member.lastActive  | date:'yyyy-MM-dd' }}</p>
+                </div>
+                <div>
+                    <strong>Reputation score: {{ member.questionsPosted +  member.questionsAnswered}}</strong>
+                    <p>
+                        <span>Questions posted: {{ member.questionsPosted}}</span><br>
+                        <span>Questions answered: {{ member.questionsAnswered}}</span>
+                    </p>
+                    
+                </div>
+            </div>
+            <ng-container *ngIf="(accountService.currentUser$ | async) as user">
+                <div class="card-footer" *ngIf="user.username === member.username">
+                    <!-- <div class="btn-group d-flex"> -->
+                        <button class="btn-primary">Edit profile</button>
+                    <!-- </div> -->
+                </div>
+            </ng-container>            
+        </div>
+    </div>
+    <div class="col-8">
+        <tabset class="member-tabset">
+            <tab heading='Questions posted'>
+                <app-question-list [isUserSpecific]="true" [username]="member.username"></app-question-list>
+            </tab>
+            <tab heading='Questions answered'>
+                <app-question-list [isUserSpecific]="true" [username]="member.username" [isUserAnswered]="true"></app-question-list>
+            </tab>
+            <tab heading='About'>
+                <h4>About</h4>
+                <p>Maybe let user add some info about themselfs</p>
+            </tab>
+            <tab heading='Proficiencies'>
+                <h4>Proficiencies</h4>
+                <p>Maybe let user add proficiencies like what languages they mastered</p>
+            </tab>
+        </tabset>
+    </div>
+</div>

@@ -1,0 +1,112 @@
+[
+  {
+    "UserName": "Ann",
+    "FirstName": "Marietta",
+    "LastName": "Coleman",
+    "Email": "jeffersonwilder@stockpost.com",
+    "DateJoined": "2019-09-15",
+    "Photo": {
+      "Url": "https://randomuser.me/api/portraits/women/90.jpg",
+      "IsMain": true
+    }
+  },
+  {
+    "UserName": "Deidre",
+    "FirstName": "Lorrie",
+    "LastName": "Jarvis",
+    "Email": "jeannineforeman@peticular.com",
+    "DateJoined": "2019-09-09",
+    "Photo": {
+      "Url": "https://randomuser.me/api/portraits/women/41.jpg",
+      "IsMain": true
+    }
+  },
+  {
+    "UserName": "Eula",
+    "FirstName": "Autumn",
+    "LastName": "Contreras",
+    "Email": "dejesuscherry@qimonk.com",
+    "DateJoined": "2021-02-11",
+    "Photo": {
+      "Url": "https://randomuser.me/api/portraits/women/2.jpg",
+      "IsMain": true
+    }
+  },
+  {
+    "UserName": "Yesenia",
+    "FirstName": "Chris",
+    "LastName": "Bass",
+    "Email": "tranwatkins@ecrater.com",
+    "DateJoined": "2020-04-08",
+    "Photo": {
+      "Url": "https://randomuser.me/api/portraits/women/19.jpg",
+      "IsMain": true
+    }
+  },
+  {
+    "UserName": "Hattie",
+    "FirstName": "Jill",
+    "LastName": "Gillespie",
+    "Email": "blairmcguire@snacktion.com",
+    "DateJoined": "2019-05-10",
+    "Photo": {
+      "Url": "https://randomuser.me/api/portraits/women/90.jpg",
+      "IsMain": true
+    }
+  },
+  {
+    "UserName": "Scott",
+    "FirstName": "Lowe",
+    "LastName": "Jensen",
+    "Email": "kerrystewart@bostonic.com",
+    "DateJoined": "2019-12-12",
+    "Photo": {
+      "Url": "https://randomuser.me/api/portraits/men/9.jpg",
+      "IsMain": true
+    }
+  },
+  {
+    "UserName": "Joyner",
+    "FirstName": "Battle",
+    "LastName": "Mccall",
+    "Email": "graystanley@gushkool.com",
+    "DateJoined": "2021-05-04",
+    "Photo": {
+      "Url": "https://randomuser.me/api/portraits/men/53.jpg",
+      "IsMain": true
+    }
+  },
+  {
+    "UserName": "Edwards",
+    "FirstName": "Vinson",
+    "LastName": "Bruce",
+    "Email": "lindsaymcmahon@anocha.com",
+    "DateJoined": "2019-11-27",
+    "Photo": {
+      "Url": "https://randomuser.me/api/portraits/men/23.jpg",
+      "IsMain": true
+    }
+  },
+  {
+    "UserName": "Cross",
+    "FirstName": "Alford",
+    "LastName": "Armstrong",
+    "Email": "laurengibbs@daycore.com",
+    "DateJoined": "2021-02-15",
+    "Photo": {
+      "Url": "https://randomuser.me/api/portraits/men/10.jpg",
+      "IsMain": true
+    }
+  },
+  {
+    "UserName": "Stephenson",
+    "FirstName": "Barton",
+    "LastName": "Bryan",
+    "Email": "rachaelwatson@trasola.com",
+    "DateJoined": "2020-08-21",
+    "Photo": {
+      "Url": "https://randomuser.me/api/portraits/men/50.jpg",
+      "IsMain": true
+    }
+  }
+]

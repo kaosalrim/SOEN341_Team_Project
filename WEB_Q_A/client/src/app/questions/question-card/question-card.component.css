@@ -1,0 +1,22 @@
+.card {
+  border-radius: 20px;
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.08), 0 0 6px rgba(0, 0, 0, 0.05);
+  transition: 0.3s transform cubic-bezier(0.155, 1.105, 0.295, 1.12),
+    0.3s box-shadow,
+    0.3s -webkit-transform cubic-bezier(0.155, 1.105, 0.295, 1.12);
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+
+.card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 20px 20px rgba(67, 7, 235, 0.12), 0 8px 16px rgba(6, 10, 245, 0.06);
+}
+
+img:hover {
+  cursor: pointer;
+}
+
+.custom-link{
+  cursor: pointer;
+}

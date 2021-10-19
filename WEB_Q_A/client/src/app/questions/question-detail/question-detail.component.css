@@ -1,0 +1,26 @@
+.custom {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    border: 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
+  img:hover {
+    cursor: pointer;
+}
+
+.custom-link{
+  cursor: pointer;
+}
+
+.answers-deck {
+  display: flex;
+  flex-flow: row wrap;
+  margin-right: -15px;
+  margin-left: -15px;
+  flex-direction: column;
+}
+
+.row{
+  width: 100%;
+}
