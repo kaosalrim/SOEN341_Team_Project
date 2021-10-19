@@ -3,10 +3,11 @@
     "",
     "\\WEB_Q_A",
     "\\WEB_Q_A\\API",
+    "\\WEB_Q_A\\API\\Controllers",
+    "\\WEB_Q_A\\API\\Data",
+    "\\WEB_Q_A\\API\\Data\\Migrations",
     "\\WEB_Q_A\\API\\Entities"
   ],
-  "SelectedNode": "\\WEB_Q_A\\API\\Entities\\AppUser.cs",
-    ""
-  ],
+  "SelectedNode": "\\WEB_Q_A\\API\\Controllers\\AnswerController.cs",
   "PreviewInSolutionExplorer": false
 }
