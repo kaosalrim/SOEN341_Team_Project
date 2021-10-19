@@ -12,6 +12,7 @@ namespace API.Entities
         public string QuestionDetails { get; set; }
         public int Rank { get; set; } = 0;
         public Boolean BestQuestion { get; set; } = false;
+        public int VoteCount { get; set; } = 0;
         public int Views { get; set; } = 0;
         public DateTime DatePosted { get; set; } = DateTime.Now;
         public ICollection<Answer> Answers { get; set; }
