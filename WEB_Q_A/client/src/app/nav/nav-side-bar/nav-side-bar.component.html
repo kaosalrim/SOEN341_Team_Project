@@ -1,0 +1,34 @@
+<div class="d-flex flex-column flex-shrink-0 text-white">
+<ul class="nav nav-pills flex-column mb-auto">
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/questions" routerLinkActive="active">
+            <img src="/assets/question-circle.svg" alt="questions" width="16" height="16">
+          Questions
+        </a>
+      </li>
+      <li>
+        <a class="nav-link" routerLink="/topics" routerLinkActive="active">
+            <img src="/assets/book-half.svg" alt="topics" width="16" height="16">
+          Topics
+        </a>
+      </li>
+      <ng-container *ngIf="(accountService.currentUser$ | async) as user">
+        <li>
+          <a class="nav-link" routerLink='/users/{{ user.username}}' routerLinkActive="active">
+              <img src="/assets/speedometer2.svg" alt="dash" width="16" height="16">
+            Dashboard
+          </a>
+        </li>
+      </ng-container>      
+    </ul>
+    <hr>
+    <div class="dropdown" *ngIf="(accountService.currentUser$ | async) as user" dropdown>
+        <img class="ml-4" src="{{ user.photoUrl || 'assets/user.png' }}" alt="" width="32" height="32"/>
+        <a class="dropdown-toggle text-dark ml-3" dropdownToggle>Welcome {{user.username | titlecase}}</a>
+        <div class="dropdown-menu mt-3" *dropdownMenu>
+          <a class="dropdown-item" routerLink='/users/{{ user.username}}'>Edit Profile</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" (click)="logout()">Logout</a>
+        </div>
+      </div>
+</div>

@@ -1,8 +1,8 @@
-<div class="container mt-5">
+<div class="container" style="padding: 10px 0; margin: 0;">
   <div *ngIf="!registerMode" style="text-align: center">
-    <h1>Find your answer</h1>
+    <h1>To post a question please register...</h1>
     <p class="lead">
-      Come on in to ask your questions... All you need to do is sign up!
+      If you already have an account please log in first.
     </p>
     <div class="text-center">
       <button (click)="registerToggle()" class="btn btn-primary btn-lg mr-2">
@@ -14,7 +14,7 @@
 
   <div *ngIf="registerMode" class="container">
     <div class="row justify-content-center">
-      <div class="col-4">
+      <div class="col-6">
         <!--pass the values from aprent component to child component 
             [] => holds the variable name declared in the child component
             () => varibaleName declared in the child component

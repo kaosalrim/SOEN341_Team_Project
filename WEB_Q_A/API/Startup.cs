@@ -1,16 +1,11 @@
-using API.Data;
 using API.Extensions;
 using API.Middleware;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
-using API.Entities;
 
 namespace API
 {
@@ -32,31 +27,9 @@ namespace API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddApplicationServices(_config);
-            services.AddDbContext<DataContext>(options =>
-            {
-                options.UseSqlite(_config.GetConnectionString("DefaultConnection"));
-            });
-            services.AddDefaultIdentity<ApplicationUser>()
-                .AddEntityFrameworkStores<DataContext>();
-            var serve = services.Configure<IdentityOptions>(options =>
-            {
-                options.Password.RequireDigit = false;
-                options.Password.RequireNonAlphanumeric = false;
-                options.Password.RequireLowercase = false;
-                options.Password.RequireUppercase = false;
-                options.Password.RequiredLength = 4;
-            }
-           );
-
-            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(options => options.LoginPath = "/api/users/Login");
-            IdentityBuilder builder = services.AddIdentityCore<ApplicationUser>();
-
-            builder = new IdentityBuilder(builder.UserType, builder.Services);
-
-            builder.AddEntityFrameworkStores<DataContext>();
-
-            builder.AddSignInManager<SignInManager<ApplicationUser>>();
             
+            //services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(options => options.LoginPath = "/api/users/Login");
+                        
             services.AddControllers();
             services.AddCors();
             services.AddIdentityServices(_config);
