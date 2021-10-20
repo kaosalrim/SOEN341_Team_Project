@@ -1,0 +1,133 @@
+* {
+    box-sizing: border-box;
+  
+  }
+  
+  .ColumnLeft {
+    border-style:hidden hidden hidden hidden; 
+    float: left;
+    width: 50%;
+    padding: 10px;
+    margin:0px;
+    height: 500px; 
+    background-color:#FFFFFF;
+  }
+  
+  .row:after {
+    content: "";
+    display: table;
+    clear: both;
+    background-color:#FFFFFF;
+  }
+  
+  .container{
+    text-align: right;    
+  }
+  .sign-in {
+    background-color: #F8E5A0;
+    border: none;
+    padding: 16px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 45px 20px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    
+  }
+  .sign-in:hover{
+  background-color: #F4D35E;
+  }
+  
+  .register {
+    background-color: #F8E5A0;
+    border: none;
+    padding: 16px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 45px 20px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    
+  }
+  .register:hover{
+  background-color: #F4D35E;
+  
+  }
+  
+  /* .GoogleButton{
+    width:215px;
+    height:50px;
+    background-image: url("google-login.png" );
+    background-size: cover;
+    margin: auto;
+    border: hidden;
+  }
+  
+  .FacebookButton{
+    width:215px;
+    height:50px;
+    background-image: url("fb-login.png" );
+    background-size: cover;
+    margin: auto;
+    border: hidden;
+   
+  }
+  
+  .GitButton{
+    width:215px;
+    height:50px;
+    background-image: url("github-login.jpg" );
+    background-size: cover;
+    margin: auto;
+    border: hidden;
+  } */
+  
+  .GoogleButton{
+    width:215px;
+    height:50px;
+    background-image: url("btn_google_signin_dark_pressed_web@2x.png" );
+    background-size: cover;
+    cursor: pointer
+  }
+  
+  .FacebookButton{
+    width:215px;
+    height:50px;
+    background-image: url("facebook.png" );
+    background-size: cover;
+    cursor: pointer
+   
+  }
+  
+  .GitButton{
+    width:215px;
+    height:50px;
+    background-image: url("github.png" );
+    background-size: cover;
+    cursor: pointer
+  }
+  
+  .username{ 
+    margin: 0;
+    position: relative;
+  
+    left: 50%;
+    margin-right: -100%;
+  
+  }
+  
+  .password{
+    margin: 0;
+    position: relative;
+  
+     left: 50%;
+    margin-right: -100%;
+  
+  }
+  .login-page{
+      text-align: center;
+  }

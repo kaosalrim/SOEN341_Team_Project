@@ -32,6 +32,7 @@ import { AnswerEditComponent } from './answers/answer-edit/answer-edit.component
 import { AnswerCreateComponent } from './answers/answer-create/answer-create.component';
 import { QuestionCreateComponent } from './questions/question-create/question-create.component';
 import { TextInputComponent } from './_forms/text-input/text-input.component';
+import { LoginComponent } from './login/login/login.component';
 
 @NgModule({
   declarations: [
@@ -55,6 +56,7 @@ import { TextInputComponent } from './_forms/text-input/text-input.component';
     AnswerCreateComponent,
     QuestionCreateComponent,
     TextInputComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
