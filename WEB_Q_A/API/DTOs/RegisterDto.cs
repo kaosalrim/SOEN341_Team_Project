@@ -1,8 +1,4 @@
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace API.DTOs
 {
@@ -14,9 +10,10 @@ namespace API.DTOs
         [Required]
         public string Username { get; set; }
         [Required]
+        [StringLength(32, MinimumLength = 8)]
         public string Password { get; set; }
         [Required]
-        public string FristName { get; set; }
+        public string FirstName { get; set; }
         [Required]
         public string LastName { get; set; }
         [Required]

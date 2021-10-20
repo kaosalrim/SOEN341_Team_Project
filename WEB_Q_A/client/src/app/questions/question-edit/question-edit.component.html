@@ -1,0 +1,37 @@
+<ng-container *ngIf="user?.username === question?.username">
+  <div class="container-fluid" *ngIf="question">
+    <div class="row">
+      <div class="col-4">
+        <h1>Question edit</h1>
+      </div>
+      <div class="col-8">
+        <div class="alert alert-info" *ngIf="editForm.dirty">
+          <strong>Information: </strong>
+            You have made changes. Any unsaved changes will be lost.
+        </div>
+      </div>
+    </div>
+    <form #editForm="ngForm" id="editForm" (ngSubmit)="updateQuestion()">
+      <div class="card">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-12">
+              <h3>Question title:</h3>
+              <textarea class="form-control" [(ngModel)]="question.questionTitle" name="questionTitle" rows="2"></textarea>
+            </div>
+          </div>
+          <div class="row mt-2">
+            <div class="col-12">
+              <h3>Question details:</h3>
+              <textarea class="form-control" [(ngModel)]="question.questionDetails" name="questionDetails" rows="15"></textarea>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <button class="btn-success" type="submit" [disabled]="!editForm.dirty">Save Changes</button>
+        </div>
+      </div>
+    </form>
+  </div>
+  <!-- </div> -->
+</ng-container>

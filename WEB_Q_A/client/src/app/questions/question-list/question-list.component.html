@@ -1,1 +1,19 @@
-<p>Question-list works!</p>
+
+<div class="container-fluid" style="padding: 0;">
+    <div class="row" style="padding-bottom: 20px;" *ngIf="!isUserSpecific">
+        <div class="col">
+            <h1>Top questions</h1>
+        </div>
+        <div class="col d-flex justify-content-end" style="padding-right: 6%;">
+            <button *ngIf="user" class="btn btn-outline-primary" routerLink='/question/create'>Ask a question</button>
+        <button *ngIf="!user" class="btn btn-outline-primary" routerLink='/register'>Ask a question</button>
+        </div>
+    </div>   
+    
+    <div class="card-deck"  style="padding-right: 5%;">
+        <ng-container *ngFor="let question of questions" >
+            <app-question-card [question]="question" [isCurrentUser]="isUserSpecific" [isUserAnswered]="isUserAnswered"></app-question-card>
+        </ng-container>
+        
+    </div>
+</div>

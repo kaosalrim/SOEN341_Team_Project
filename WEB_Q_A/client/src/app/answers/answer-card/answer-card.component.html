@@ -1,0 +1,29 @@
+<div class="card">
+    <div class="row">
+        <div class="col-1 d-flex align-items-center justify-content-center">
+            <p class="text-center" *ngIf="answer.isBestAnswer">
+              <svg xmlns="http://www.w3.org/2000/svg" width="64" 
+              height="64" class="bi bi-check2 text-success" fill="currentColor" viewBox="0 0 16 16">
+              <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
+            </svg></p>        
+        </div>
+        <div class="col-11">
+            <div class="card-body">
+                <p class="card-text">{{ answer.answerDetails }}</p>
+                <p class="card-text"><small class="text-muted">Posted on: {{ answer.datePosted   | date:'yyyy-MM-dd' }}</small></p>                
+                <span class="mr-2">Posted by: 
+                    <img src="{{ photo?.url || './assets/user.png' }}" alt="" width="32" height="32" routerLink='/users/{{ answer.username}}'/> 
+                    <span class="ml-2 custom-link" routerLink='/users/{{ answer.username}}'>{{answer.username}}</span>
+                </span>                
+                <small class="text-muted">Reputation score: {{ rep }}</small>
+            </div>
+            <ng-container *ngIf="(accountService.currentUser$ | async) as user">
+                <div class="card-footer" *ngIf="user.username === answer.username">
+                    <!-- <div class="btn-group d-flex"> -->
+                        <button class="btn-primary" routerLink="/answer/edit/{{answer.id}}">Edit answer</button>
+                    <!-- </div> -->
+                </div>
+            </ng-container>
+        </div>
+    </div>
+</div>
