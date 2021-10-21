@@ -10,6 +10,7 @@ addons:
   chrome: stable
 
 before_script:
+  - npm install -g @angular/cli@latest
   - cd WEB_Q_A/client
 
 
