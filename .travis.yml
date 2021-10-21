@@ -1,32 +1,33 @@
 language: node_js
 node_js:
- - node
+ - 14
 
 branches:
   only:
-    - master
+    - main
 
 addons:
   chrome: stable
 
 before_script:
-  - yarn global add @angular/cli
+  - cd WEB_Q_A/client
+  - npm install -g @angular/cli@latest
+  - npm ci
+
 
 cache:
-  yarn: true
   directories:
     - node_modules
 
 script:
-  - ng lint
-  - ng build --prod
+  - ng build
 
 
 
-deploy:
-  provider: pages
-  skip-cleanup: true
-  github-token: $GITHUB_TOKEN
-  keep-history: true
-  local-dir: ./dist/
-  on:
+# deploy:
+#   provider: pages
+#   skip-cleanup: true
+#   github-token: $GITHUB_TOKEN
+#   keep-history: true
+#   local-dir: ./dist/
+#   on:
