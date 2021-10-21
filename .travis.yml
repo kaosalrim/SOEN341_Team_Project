@@ -12,6 +12,7 @@ addons:
 before_script:
   - cd WEB_Q_A/client
   - npm install -g @angular/cli@latest
+  - npm ci
 
 
 cache:
