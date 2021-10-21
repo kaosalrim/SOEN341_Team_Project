@@ -10,8 +10,8 @@ addons:
   chrome: stable
 
 before_script:
-  - npm install -g @angular/cli@latest
   - cd WEB_Q_A/client
+  - npm install -g @angular/cli@latest
 
 
 cache:
@@ -23,10 +23,10 @@ script:
 
 
 
-deploy:
-  provider: pages
-  skip-cleanup: true
-  github-token: $GITHUB_TOKEN
-  keep-history: true
-  local-dir: ./dist/
-  on:
+# deploy:
+#   provider: pages
+#   skip-cleanup: true
+#   github-token: $GITHUB_TOKEN
+#   keep-history: true
+#   local-dir: ./dist/
+#   on:
