@@ -11,15 +11,13 @@ addons:
 
 before_script:
   - cd WEB_Q_A/client
-  - yarn global add @angular/cli
 
 cache:
-  yarn: true
   directories:
     - node_modules
 
 script:
-  - ng serve
+  - ng build
 
 
 
