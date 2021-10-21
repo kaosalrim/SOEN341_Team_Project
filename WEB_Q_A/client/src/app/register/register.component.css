@@ -1,0 +1,146 @@
+
+.title{
+    margin: auto;
+     font-size: 50px;
+    padding: 10px;
+    text-align: center;
+  }
+  
+  .ColumnLeft {
+      border-style:hidden hidden hidden hidden; 
+    float: left;
+    width: 50%;
+    padding: 10px;
+    margin:0px;
+      height: 500px; 
+    background-color:#FFFFFF;
+  }
+  
+  
+  .ColumnRight {
+      border-style:hidden hidden hidden hidden;
+      float: right;
+      width: 50%;
+      padding: 10px;
+      height: 500px;
+    }
+  
+  
+  
+  .row:after {
+    content: "";
+    display: table;
+    clear: both;
+    background-color:#FFFFFF;
+  }
+  
+  
+  .button {
+    background-color: #F8E5A0;
+    border: none;
+    padding: 16px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin:10px 200px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+  }
+  .submit:hover{
+  background-color: #F4D35E;
+  }
+  
+  .labelUsername{
+  text-align: center;
+  
+  
+  }
+  form  { display: table;      }
+  p     { display: table-row;  }
+  label { display: table-cell; }
+  input { display: table-cell; }
+  
+  .formCreateAccount{
+    margin:0%;
+   
+  }
+  
+  
+  .GoogleButton{
+    width:215px;
+    height:50px;
+    background-image: url("btn_google_signin_dark_pressed_web@2x.png" );
+    background-size: cover;
+    cursor: pointer
+  }
+  
+  .FacebookButton{
+    width:215px;
+    height:50px;
+    background-image: url("facebook.png" );
+    background-size: cover;
+    cursor: pointer
+   
+  }
+  
+  .GitButton{
+    width:215px;
+    height:50px;
+    background-image: url("github.png" );
+    background-size: cover;
+    cursor: pointer
+  }
+  
+  
+  
+  
+  .divUsername{ 
+    margin:  0px 200px;
+    
+    
+     left: 100%;
+    margin-right: -100%;
+    
+  }
+  
+  .divEmail{
+    margin:  0px 200px;
+  
+   
+     left: 100%;
+    margin-right: -100%;
+    
+  }
+  
+  .divPassword{
+    margin:  25px 200px;
+    
+    
+     left: 100%;
+    margin-right: -100%;
+    
+  }
+  
+  .divConfirmpass{
+    margin: 0px 200px;
+   
+       left: 100%;
+    margin-right: -100%;
+     
+  }
+  
+  
+  .sub-title1{
+    margin: auto;
+     font-size: 30px;
+    padding: 10px;
+    text-align: right;
+  }
+  
+  .sub-title2{
+    margin: auto;
+     font-size: 30px;
+    padding: 0px;
+    text-align: left;
+  }
