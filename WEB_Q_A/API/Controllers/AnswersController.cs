@@ -35,6 +35,34 @@ namespace API.Controllers
             var answers = await _answerRepository.GetAnswersByUsernameAsync(username);
             return Ok(answers);
         }
+        [Authorize]
+        [HttpPut("upvote/{id}")]
+        public async Task<ActionResult> UpVote(int id)
+        {   
+            var answer = await _answerRepository.GetEAnswerByIdAsync(id);
+            int rank = answer.Rank;
+            rank = rank + 1;
+            answer.Rank = rank;
+            _answerRepository.Update(answer);
+            if (await _answerRepository.SaveAllAsync()) return NoContent();
+
+            return BadRequest("Failed to update the answer");
+
+        }
+        [Authorize]
+        [HttpPut("downvote/{id}")]
+        public async Task<ActionResult> DownVote(int id)
+        {   
+            var answer = await _answerRepository.GetEAnswerByIdAsync(id);
+            int rank = answer.Rank;
+            rank = rank - 1;
+            answer.Rank = rank;
+            _answerRepository.Update(answer);
+            if (await _answerRepository.SaveAllAsync()) return NoContent();
+
+            return BadRequest("Failed to update the answer");
+
+        }
 
         // api/answers/3
         [HttpGet("{id}")]

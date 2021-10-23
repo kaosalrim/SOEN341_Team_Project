@@ -6,9 +6,9 @@ namespace API.Entities
     [Table("Answers")]
     public class Answer
     {
-        public int Id { get; set; }
+        public int Id { get; set;}
+        public bool IsBestAnswer { get; set; } = false;
         public int Rank { get; set; } = 0;
-        public bool IsBestAnswer { get; set; } = false;        
         public string AnswerDetails { get; set; }        
         public DateTime DatePosted { get; set; } = DateTime.Now;       
         public Question Question { get; set; }

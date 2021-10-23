@@ -61,7 +61,7 @@ export class QuestionService {
   createQuestion(question: Question){
       return this.http.post<Question>(this.baseUrl + "questions/" , question);
   }
-
+  
   updateQuestion(question?: Question){
     if (question) {
       return this.http.put(this.baseUrl + "questions/" + question.id, question);
