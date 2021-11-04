@@ -4,7 +4,6 @@ import { take } from 'rxjs/operators';
 import { Answer } from 'src/app/_models/answer';
 import { Member } from 'src/app/_models/member';
 import { User } from 'src/app/_models/user';
-import { UserVotes } from 'src/app/_models/UserVotes';
 import { AccountService } from 'src/app/_services/account.service';
 import { AnswerService } from 'src/app/_services/answer.service';
 import { MemberService } from 'src/app/_services/member.service';
