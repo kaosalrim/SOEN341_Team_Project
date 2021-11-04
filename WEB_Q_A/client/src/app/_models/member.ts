@@ -1,6 +1,6 @@
 import { MemberSince } from "./membersince";
 import { Question } from "./question";
-import { UserVotes } from "./UserVotes";
+import { UserVotes } from "./uservotes";
 
 export interface Member {
     username:    string;
