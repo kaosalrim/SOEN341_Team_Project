@@ -7,6 +7,7 @@ import { Answer } from 'src/app/_models/answer';
 import { User } from 'src/app/_models/user';
 import { AccountService } from 'src/app/_services/account.service';
 import { AnswerService } from 'src/app/_services/answer.service';
+import { QuestionService } from 'src/app/_services/question.service';
 
 @Component({
   selector: 'app-answer-edit',
@@ -25,7 +26,7 @@ export class AnswerEditComponent implements OnInit {
     }
   }
 
-  constructor(private accountService: AccountService, private answerService: AnswerService,
+  constructor(private accountService: AccountService, private answerService: AnswerService, private questionService: QuestionService,
     private route: ActivatedRoute, private toastr: ToastrService) {
       this.accountService.currentUser$.pipe(take(1)).subscribe(user => this.user = user); 
      }
@@ -41,6 +42,7 @@ export class AnswerEditComponent implements OnInit {
   updateAnswer(){
     this.answerService.updateAnswer(this.answer)?.subscribe(() => {
       this.toastr.success('Answer updated successfully');
+      this.questionService.updateQuestionsAnswers(this.answer);
       this.editForm?.reset(this.answer);
     }, error => {
       

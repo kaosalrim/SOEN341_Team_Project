@@ -26,7 +26,7 @@ export class RegisterComponent implements OnInit {
 
   initializeForm(){
     this.registerForm = this.fb.group({
-      firstName: ['', Validators.required],
+      firstName: [''/*, Validators.required*/],
       lastName: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       username: ['', Validators.required],
@@ -54,7 +54,15 @@ export class RegisterComponent implements OnInit {
         this.router.navigateByUrl('/questions');
       },
       (error) => {
-        this.validationErrors = error;
+        if(error){
+          if (error.error){
+            error.error.forEach((element: { description: string; }) => {
+              this.validationErrors.push(element.description);
+            }); 
+          }else{
+            this.validationErrors = error;
+          }
+        }             
       }
     );
   }

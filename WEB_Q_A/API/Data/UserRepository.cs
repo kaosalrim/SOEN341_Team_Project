@@ -42,6 +42,7 @@ namespace API.Data
         {
             return await _context.Users
             .Include(p => p.Questions)
+            .Include(u => u.UserVotes)
             .SingleOrDefaultAsync(x => x.UserName == username);
         }
 

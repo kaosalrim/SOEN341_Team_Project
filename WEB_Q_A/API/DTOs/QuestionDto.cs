@@ -16,5 +16,7 @@ namespace API.DTOs
         [Required]
         public string Username { get; set; }
         public bool HasBestAnswer { get; set; }
+        public string UserPhotoUrl { get; set; }
+        public int UserRep { get; set; } = 0;
     }
 }

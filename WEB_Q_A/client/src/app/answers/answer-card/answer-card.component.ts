@@ -1,8 +1,13 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
+import { take } from 'rxjs/operators';
 import { Answer } from 'src/app/_models/answer';
-import { Photo } from 'src/app/_models/photo';
+import { Member } from 'src/app/_models/member';
+import { User } from 'src/app/_models/user';
+import { UserVotes } from 'src/app/_models/UserVotes';
 import { AccountService } from 'src/app/_services/account.service';
-import { QuestionService } from 'src/app/_services/question.service';
+import { AnswerService } from 'src/app/_services/answer.service';
+import { MemberService } from 'src/app/_services/member.service';
 
 @Component({
   selector: 'app-answer-card',
@@ -12,26 +17,84 @@ import { QuestionService } from 'src/app/_services/question.service';
 export class AnswerCardComponent implements OnInit {
   @Input()
   answer!: Answer;
-  photo?: Photo;
-  rep?: string;
+  user?: User;
+  member?: Member;
 
-  constructor(private questionService: QuestionService, public accountService: AccountService) { }
+  constructor(public accountService: AccountService,
+     private toastrService: ToastrService,
+     private memberService: MemberService,
+     private answerService: AnswerService) { 
+    this.accountService.currentUser$
+      .pipe(take(1))
+      .subscribe((user) => (this.user = user), () => {}, () => {
+        if(this.user){
+          this.memberService.getMember(this.user.username).subscribe(member => {
+            this.member = member;
+          })
+        }
+      });
+  }
 
   ngOnInit(): void {
-    this.getPhoto(this.answer.username);
-    this.getRep(this.answer.username);
   }
 
-  getPhoto(username:string){
-    this.questionService.getUserQuestionPhoto(username).subscribe(p => {
-      this.photo = p;
-    })
+  rankUp(){
+    if(this.member){
+      const vote = this.member.userVotes.find(x => x.answerId === this.answer.id);
+      if(vote === undefined){
+        this.answer.rank += 1;
+        this.answerService.updateAnswerRank(true, this.user!.username, this.answer)?.subscribe(() => {
+          this.toastrService.success('Upvoted');
+        }, error => {
+          this.toastrService.error('Something went wrong ' + error);
+        }, () => {
+          this.memberService.getMember(this.user!.username, true).subscribe(member => {
+            this.member = member;
+          })
+        })
+      }else {
+        this.toastrService.error('You already upvoted for this answer.');
+      }
+    } else {
+      this.toastrService.error('You must login or register to use this function.');
+    }    
   }
 
-  getRep(username:string){
-    this.questionService.getUserQuestionRep(username).subscribe(p => {
-      this.rep = p;
-    })
+  rankDown(){
+    if(this.member){
+      const vote = this.member.userVotes.find(x => x.answerId === this.answer.id);
+      if(vote !== undefined){
+        this.answer.rank -= 1;
+        this.answerService.updateAnswerRank(false, this.user!.username, this.answer)?.subscribe(() => {
+          this.toastrService.success('Downvoted');
+        }, error => {
+          this.toastrService.error('Something went wrong ' + error);
+        }, () => {
+          this.memberService.getMember(this.user!.username, true).subscribe(member => {
+            this.member = member;
+          })
+        })
+      }else {
+        this.toastrService.error('You never upvoted this answer.');
+      }
+    } else {
+      this.toastrService.error('You must login or register to use this function.');
+    }  
   }
 
+  acceptAnswer(){
+    if(this.member){
+      
+    } else {
+      this.toastrService.error('You must login or register to use this function.');
+    }  
+  }
+
+  unAcceptAnswer(){
+    if(this.member){
+      
+    } else {
+      this.toastrService.error('You must login or register to use this function.');
+    }  
+  }
 }

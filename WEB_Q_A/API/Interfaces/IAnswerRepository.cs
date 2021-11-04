@@ -8,6 +8,7 @@ namespace API.Interfaces
     public interface IAnswerRepository
     {
         void Update(Answer Answer);
+        void UpdateRank(Answer Answer, int userId, bool upvote);
         void Create(Answer Answer);
         Task<bool> SaveAllAsync();
         Task<IEnumerable<Answer>> GetEAnswersAsync();

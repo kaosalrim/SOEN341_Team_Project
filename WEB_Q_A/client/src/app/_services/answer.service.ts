@@ -28,4 +28,11 @@ export class AnswerService {
     }
     return null;
   }
+
+  updateAnswerRank(upvote: boolean, username: string, answer?: Answer){
+    if (answer) {
+      return this.http.put(this.baseUrl + "answers/updaterank/" + answer.id + "/" + upvote + "/" + username, answer);
+    }
+    return null;
+  }
 }

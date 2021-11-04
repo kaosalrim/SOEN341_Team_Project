@@ -1,5 +1,6 @@
 import { MemberSince } from "./membersince";
 import { Question } from "./question";
+import { UserVotes } from "./UserVotes";
 
 export interface Member {
     username:    string;
@@ -13,6 +14,7 @@ export interface Member {
     questionsAnswered: number;
     questionsPosted: number;
     questions:   Question[];
+    userVotes:   UserVotes[];
 }
 
 
