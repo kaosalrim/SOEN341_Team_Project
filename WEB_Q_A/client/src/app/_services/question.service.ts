@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { of } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
-import { Photo } from '../_models/photo';
+import { Answer } from '../_models/answer';
 import { Question } from '../_models/question';
 import { MemberService } from './member.service';
 
@@ -36,7 +36,6 @@ export class QuestionService {
   }
 
   getUserQuestions(username: string){
-
     if (this.questions.length > 0) {
       const qs = this.questions.filter(x => x.username === username);
       if(qs.length > 0){
@@ -50,22 +49,32 @@ export class QuestionService {
     return this.http.get<Question[]>(this.baseUrl + 'questions/user-answered/' + username);
   }
 
-  getUserQuestionPhoto(username: string){
-    return this.http.get<Photo>(this.baseUrl + 'questions/get-user-photo/' + username);
-  }
-
-  getUserQuestionRep(username: string){
-    return this.http.get<string>(this.baseUrl + 'questions/get-user-rep/' + username);
-  }
-
   createQuestion(question: Question){
       return this.http.post<Question>(this.baseUrl + "questions/" , question);
   }
 
   updateQuestion(question?: Question){
     if (question) {
-      return this.http.put(this.baseUrl + "questions/" + question.id, question);
+      return this.http.put(this.baseUrl + "questions/" + question.id, question).pipe(map(() => {
+        const index = this.questions.indexOf(question);
+        if(index !== -1)
+          this.questions[index] = question;
+      }));
     }
     return null;
+  }
+
+  updateQuestionsAnswers(answer? : Answer){
+    if(answer){
+      const question = this.questions.find(x => x.id = answer.questionId);
+      if(question !== undefined){
+        const qIndex = this.questions.indexOf(question);
+        const index = question.answers.indexOf(answer);
+        if (index !== -1){
+          question.answers[index] = answer;
+          this.questions[qIndex] = question;
+        }
+      }
+    }
   }
 }

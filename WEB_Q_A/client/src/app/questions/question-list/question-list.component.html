@@ -11,7 +11,7 @@
     </div>   
     
     <div class="card-deck"  style="padding-right: 5%;">
-        <ng-container *ngFor="let question of questions" >
+        <ng-container *ngFor="let question of questions$ | async" >
             <app-question-card [question]="question" [isCurrentUser]="isUserSpecific" [isUserAnswered]="isUserAnswered"></app-question-card>
         </ng-container>
         

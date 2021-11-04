@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { Question } from 'src/app/_models/question';
 import { User } from 'src/app/_models/user';
@@ -17,7 +18,8 @@ export class QuestionListComponent implements OnInit {
   isUserAnswered: boolean = false;
   @Input()
   username: string = "";
-  questions: Question[] = [];
+  // questions: Question[] = [];
+  questions$!: Observable<Question[]>;
   user?: User;
 
   constructor(private questionService: QuestionService, private accountService: AccountService) {
@@ -37,20 +39,14 @@ export class QuestionListComponent implements OnInit {
   }
 
   loadQuestions(){
-    this.questionService.getQuestions().subscribe(questions => {
-      this.questions = questions;
-    })
+    this.questions$ = this.questionService.getQuestions();
   }
 
   loadUserQuestions(username: string){
-    this.questionService.getUserQuestions(username).subscribe(questions => {
-      this.questions = questions;
-    })
+    this.questions$ = this.questionService.getUserQuestions(username);
   }
 
   loadUserAnsweredQuestions(username: string){
-    this.questionService.getUserQuestionsAnswered(username).subscribe(questions => {
-      this.questions = questions;
-    })
+    this.questions$ = this.questionService.getUserQuestionsAnswered(username);
   }
 }

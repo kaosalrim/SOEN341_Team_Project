@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Linq;
 using System.Threading.Tasks;
 using API.DTOs;
 using API.Entities;
@@ -50,6 +52,28 @@ namespace API.Controllers
             var answer = await _answerRepository.GetEAnswerByIdAsync(id);
             _mapper.Map(answerUpdateDto, answer);
             _answerRepository.Update(answer);
+
+            if (await _answerRepository.SaveAllAsync()) return NoContent();
+
+            return BadRequest("Failed to update the answer");
+        }
+
+        [Authorize]
+        [HttpPut("updaterank/{id}/{upvote}/{username}")]
+        public async Task<ActionResult> UpdateAnswerRank(int id, bool upvote, string username, AnswerUpdateDto answerUpdateDto)
+        {
+            var user = await _userRepository.GetUserByUsernameAsync(username);
+            
+            if (user == null) return BadRequest("Failed to update the answer");
+
+            var votes = user.UserVotes.ToList().Any(v => v.AnswerId == id && v.AppUserId == user.Id);
+            if(votes && upvote) return BadRequest("User already voted.");
+            if(!votes && !upvote) return BadRequest("User never voted.");
+            
+
+            var answer = await _answerRepository.GetEAnswerByIdAsync(id);
+            _mapper.Map(answerUpdateDto, answer);
+            _answerRepository.UpdateRank(answer, user.Id, upvote);
 
             if (await _answerRepository.SaveAllAsync()) return NoContent();
 

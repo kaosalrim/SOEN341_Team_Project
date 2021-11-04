@@ -7,5 +7,6 @@ namespace API.DTOs
         public bool IsBestAnswer { get; set; }  
         [Required]    
         public string AnswerDetails { get; set; } 
+        public int Rank { get; set; }
     }
 }

@@ -10,11 +10,20 @@
                         <h3 class="card-title">{{ question.questionTitle }}</h3>
                         <p class="card-text">{{ question.questionDetails }}</p>
                         <p class="card-text"><small class="text-muted">Posted on: {{ question.datePosted   | date:'yyyy-MM-dd' }}</small></p>                
-                        <span class="mr-2">Posted by: <img src="{{ photo?.url || './assets/user.png' }}" alt="" width="32" height="32" routerLink='/users/{{ question.username}}'/> 
+                        <span class="mr-2">Posted by: <img src="{{ question.userPhotoUrl || './assets/user.png' }}"
+                             alt="" width="32" height="32" routerLink='/users/{{ question.username}}'/> 
                             <span class="ml-2 custom-link" routerLink='/users/{{ question.username}}'>{{question.username}}</span>
                         </span>                
-                        <small class="text-muted">Reputation score: {{ rep }}</small>
+                        <small class="text-muted">Reputation score: {{ question.userRep }}</small>
                     </div>
+                    <ng-container *ngIf="(accountService.currentUser$ | async) as user">
+                        <div class="card-footer" *ngIf="user.username === question.username">
+                            <!-- <div class="btn-group d-flex"> -->
+                                <button class="btn-primary" routerLink="/question/edit/{{question.id}}">
+                                    Edit question</button>
+                            <!-- </div> -->
+                        </div>
+                    </ng-container>
             </div>
         </div>
         <div class="row" style="width: 100%;">

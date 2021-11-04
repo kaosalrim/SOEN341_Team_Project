@@ -1,21 +1,58 @@
 <div class="card">
     <div class="row">
-        <div class="col-1 d-flex align-items-center justify-content-center">
-            <p class="text-center" *ngIf="answer.isBestAnswer">
-              <svg xmlns="http://www.w3.org/2000/svg" width="64" 
-              height="64" class="bi bi-check2 text-success" fill="currentColor" viewBox="0 0 16 16">
-              <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
-            </svg></p>        
+        <div class="col-1 align-items-center align-middle pe-0 ps-4 pt-3">
+            <div class="row">
+                <div class="col">
+                    <p class="text-center" >
+                        <svg xmlns="http://www.w3.org/2000/svg" (click)="rankUp()"
+                        width="48" height="48" fill="currentColor" class="bi bi-caret-up" viewBox="0 0 16 16">
+                            <path d="M3.204 11h9.592L8 5.519 3.204 11zm-.753-.659 4.796-5.48a1 1 0 0 1 1.506 0l4.796 5.48c.566.647.106 1.659-.753 1.659H3.204a1 1 0 0 1-.753-1.659z"/>
+                          </svg></p> 
+                </div>                 
+            </div>
+            <div class="row">
+                <div class="col">
+                    <p class="text-center fs-4">{{answer.rank}}</p> 
+                </div>  
+            </div>
+            <div class="row">
+                <div class="col">
+                    <p class="text-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" (click)="rankDown()"
+                        width="48" height="48" fill="currentColor" class="bi bi-caret-down" viewBox="0 0 16 16">
+                            <path d="M3.204 5h9.592L8 10.481 3.204 5zm-.753.659 4.796 5.48a1 1 0 0 0 1.506 0l4.796-5.48c.566-.647.106-1.659-.753-1.659H3.204a1 1 0 0 0-.753 1.659z"/>
+                          </svg></p> 
+                </div>   
+            </div>
+            <div class="row">
+                <div class="col">
+                    <p class="text-center" *ngIf="answer.isBestAnswer">                       
+                            <svg xmlns="http://www.w3.org/2000/svg" (click)="unAcceptAnswer()"
+                            width="48" height="48" class="bi bi-check2 text-success" fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
+                          </svg>
+                    </p>
+                    <p class="text-center" *ngIf="!answer.isBestAnswer">                       
+                        <svg xmlns="http://www.w3.org/2000/svg" (click)="acceptAnswer()"
+                        width="48" height="48" class="bi bi-check2" fill="currentColor" viewBox="0 0 16 16">
+                        <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
+                      </svg>
+                </p>
+                </div>  
+            </div>      
         </div>
-        <div class="col-11">
+        <div class="col-11 ps-0">
             <div class="card-body">
                 <p class="card-text">{{ answer.answerDetails }}</p>
-                <p class="card-text"><small class="text-muted">Posted on: {{ answer.datePosted   | date:'yyyy-MM-dd' }}</small></p>                
+                <p class="card-text"><small class="text-muted">
+                    Posted on: {{ answer.datePosted   | date:'yyyy-MM-dd' }}</small></p>                
                 <span class="mr-2">Posted by: 
-                    <img src="{{ photo?.url || './assets/user.png' }}" alt="" width="32" height="32" routerLink='/users/{{ answer.username}}'/> 
-                    <span class="ml-2 custom-link" routerLink='/users/{{ answer.username}}'>{{answer.username}}</span>
+                    <img src="{{ answer.userPhotoUrl || './assets/user.png' }}" 
+                    alt="" width="32" height="32" routerLink='/users/{{ answer.username}}'/> 
+                    <span class="ml-2 custom-link" routerLink='/users/{{ answer.username}}'>
+                        {{answer.username}}</span>
                 </span>                
-                <small class="text-muted">Reputation score: {{ rep }}</small>
+                <small class="text-muted">Reputation score: {{ answer.userRep }}</small>
             </div>
             <ng-container *ngIf="(accountService.currentUser$ | async) as user">
                 <div class="card-footer" *ngIf="user.username === answer.username">

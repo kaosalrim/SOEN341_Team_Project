@@ -69,7 +69,26 @@ namespace API.Data
         {
             _context.Entry(answer).State = EntityState.Modified;
         }
-        
+
+        public void UpdateRank(Answer answer, int userId, bool upvote)
+        {
+            _context.Entry(answer).State = EntityState.Modified;
+            if (upvote)
+            {
+                _context.Entry(new UserVotes()
+                {
+                    AnswerId = answer.Id,
+                    AppUserId = userId
+                }).State = EntityState.Added;
+            }
+            else {
+                var vote = _context.UserVotes.SingleOrDefault(x => x.AnswerId == answer.Id && x.AppUserId == userId);
+                if (vote != null){
+                    _context.Entry(vote).State = EntityState.Deleted;
+                }
+            }
+        }
+
         public void Create(Answer answer)
         {
             _context.Entry(answer).State = EntityState.Added;

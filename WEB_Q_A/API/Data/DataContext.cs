@@ -17,6 +17,8 @@ namespace API.Data
 
         public DbSet<Answer> Answers { get; set; }
 
+        public DbSet<UserVotes> UserVotes { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);

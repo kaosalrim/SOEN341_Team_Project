@@ -8,4 +8,6 @@ export interface Question {
     answers:         Answer[];
     username:        string;
     hasBestAnswer:   boolean;
+    userPhotoUrl:    string;
+    userRep:         number;
 }
