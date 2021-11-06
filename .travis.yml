@@ -1,6 +1,9 @@
 # .travis.yml at the repo root
 
 language: generic
+branches:
+      only:
+        - main
 
 jobs:
   include:
@@ -8,9 +11,6 @@ jobs:
     language: node_js
     node_js:
     - 14
-    branches:
-      only:
-        - main
     addons:
       chrome: stable
     before_script:
@@ -25,20 +25,11 @@ jobs:
   - name: back-end
     language: csharp
     mono: none
-    dotnet: 5.0.11
-    sudo: required
-    dist: trusty    
-
-    branches:
-      only:
-        - main
+    dotnet: 5.0.11    
     before_script:
       - cd WEB_Q_A/API
-    before_install:
-      - sudo apt-get update```
-    install:
-      - dotnet restore
     script:
+      - dotnet restore
       - dotnet build
 
 script: if .travis/build.sh $TRAVIS_COMMIT_RANGE $TARGET; then echo "Building '$TARGET' ..." && cd $TARGET && scripts/ci.sh; else echo "No changes detected in '$TARGET'; skipping build."; fi
