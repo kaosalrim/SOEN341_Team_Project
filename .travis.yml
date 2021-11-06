@@ -26,11 +26,16 @@ jobs:
     language: csharp
     mono: none
     dotnet: 5.0.11
+    sudo: required
+    dist: trusty    
+
     branches:
       only:
         - main
     before_script:
       - cd WEB_Q_A/API
+    before_install:
+      - sudo apt-get update```
     install:
       - dotnet restore
     script:
