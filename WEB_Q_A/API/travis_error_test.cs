@@ -10,7 +10,7 @@ namespace API
         public static void Test(){
             var x = 0;
             var y = 9;
-            var z = x/y;
+            var z = y/x;
         }
     }
 }
