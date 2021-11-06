@@ -1,33 +1,39 @@
-language: node_js
-node_js:
- - 14
+# .travis.yml at the repo root
 
-branches:
-  only:
-    - main
+language: generic
 
-addons:
-  chrome: stable
+jobs:
+  include:
+  - name: front-end 
+    language: node_js
+    node_js:
+    - 14
+    branches:
+      only:
+        - main
+    addons:
+      chrome: stable
+    before_script:
+      - cd WEB_Q_A/client
+      - npm install -g @angular/cli@latest
+      - npm ci
+    cache:
+      directories:
+        - node_modules
+    script:
+      - ng build
+  - name: back-end
+    language: csharp
+    mono: none
+    dotnet: 5.0.11
+    branches:
+      only:
+        - main
+    before_script:
+      - cd WEB_Q_A/API
+    install:
+      - dotnet restore
+    script:
+      - dotnet build
 
-before_script:
-  - cd WEB_Q_A/client
-  - npm install -g @angular/cli@latest
-  - npm ci
-
-
-cache:
-  directories:
-    - node_modules
-
-script:
-  - ng build
-
-
-
-# deploy:
-#   provider: pages
-#   skip-cleanup: true
-#   github-token: $GITHUB_TOKEN
-#   keep-history: true
-#   local-dir: ./dist/
-#   on:
+script: if .travis/build.sh $TRAVIS_COMMIT_RANGE $TARGET; then echo "Building '$TARGET' ..." && cd $TARGET && scripts/ci.sh; else echo "No changes detected in '$TARGET'; skipping build."; fi
