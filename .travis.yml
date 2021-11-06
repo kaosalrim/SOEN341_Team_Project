@@ -31,4 +31,3 @@ jobs:
     script:
       - dotnet restore
       - dotnet build
-      - dotnet run
