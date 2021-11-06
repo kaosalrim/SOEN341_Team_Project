@@ -4,6 +4,7 @@ language: generic
 branches:
       only:
         - main
+dist: trusty
 
 jobs:
   include:
@@ -32,4 +33,4 @@ jobs:
       - dotnet restore
       - dotnet build
 
-script: if .travis/build.sh $TRAVIS_COMMIT_RANGE $TARGET; then echo "Building '$TARGET' ..." && cd $TARGET && scripts/ci.sh; else echo "No changes detected in '$TARGET'; skipping build."; fi
+#script: if .travis/build.sh $TRAVIS_COMMIT_RANGE $TARGET; then echo "Building '$TARGET' ..." && cd $TARGET && scripts/ci.sh; else echo "No changes detected in '$TARGET'; skipping build."; fi
