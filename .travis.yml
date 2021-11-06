@@ -4,7 +4,7 @@ language: generic
 branches:
       only:
         - main
-dist: trusty
+os: windows
 
 jobs:
   include:
