@@ -14,7 +14,6 @@ namespace API
     {
         public static async Task Main(string[] args)
         {
-            travis_error_test.Test();
             var host = CreateHostBuilder(args).Build();
             using var scope = host.Services.CreateScope();
             var services = scope.ServiceProvider;
