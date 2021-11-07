@@ -1,33 +1,33 @@
-language: node_js
-node_js:
- - 14
+# .travis.yml at the repo root
 
+language: generic
 branches:
-  only:
-    - main
+      only:
+        - main
 
-addons:
-  chrome: stable
-
-before_script:
-  - cd WEB_Q_A/client
-  - npm install -g @angular/cli@latest
-  - npm ci
-
-
-cache:
-  directories:
-    - node_modules
-
-script:
-  - ng build
-
-
-
-# deploy:
-#   provider: pages
-#   skip-cleanup: true
-#   github-token: $GITHUB_TOKEN
-#   keep-history: true
-#   local-dir: ./dist/
-#   on:
+jobs:
+  include:
+  - name: front-end 
+    language: node_js
+    node_js:
+    - 14
+    addons:
+      chrome: stable
+    before_script:
+      - cd WEB_Q_A/client
+      - npm install -g @angular/cli@latest
+      - npm ci
+    cache:
+      directories:
+        - node_modules
+    script:
+      - ng build
+  - name: back-end
+    language: csharp
+    mono: none
+    dotnet: 5.0.402  
+    before_script:
+      - cd WEB_Q_A/API
+    script:
+      - dotnet restore
+      - dotnet build
