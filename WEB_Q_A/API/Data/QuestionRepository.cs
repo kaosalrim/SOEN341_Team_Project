@@ -100,7 +100,7 @@ namespace API.Data
             .Include(a => a.Answers)
             .SingleOrDefaultAsync(u => u.UserName == username);
 
-            return (user.Questions.Count + user.Answers.Count).ToString();
+            return (user.Questions.Count + user.Answers.Select(a => a.QuestionId).Distinct().Count()).ToString();
         }
     }
 }

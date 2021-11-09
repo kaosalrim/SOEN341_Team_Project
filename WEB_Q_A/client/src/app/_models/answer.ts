@@ -5,5 +5,7 @@ export interface Answer {
     answerDetails: string;
     datePosted:    Date;
     questionId:    number;
-    username:      string;
+    username:      string;    
+    userPhotoUrl:    string;
+    userRep:         number;
 }

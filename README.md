@@ -1,7 +1,7 @@
 # SOEN341 Team Project
 ## Objective
 
-Design a Q&A style website. A simplified version of StackOverflow 
+Designing an online Q&A style website. A simplified version of StackOverflow.
 
 ## Project
 
@@ -12,7 +12,7 @@ Users can upvote and downvote the answers and select one as an accepted answer.
 
 * Ask/Answer questions
 * Up/Down vote the answers
-* Accept best answer
+* Accepting best answer
 
 ## Team Members 
 

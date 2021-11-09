@@ -17,5 +17,6 @@ namespace API.DTOs
         public ICollection<QuestionDto> Questions { get; set; }
         public int QuestionsAnswered { get; set; } = 0;
         public int QuestionsPosted { get; set; } = 0;
+        public ICollection<UserVoteDto> UserVotes {get; set;}
     }
 }

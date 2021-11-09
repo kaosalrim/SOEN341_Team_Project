@@ -26,7 +26,10 @@ export class MemberService {
     );
   }
 
-  getMember(username: string){
+  getMember(username: string, force: boolean = false){
+    console.log(force);
+    if(force) return this.http.get<Member>(this.baseUrl + 'users/' + username);
+
     const member = this.members.find(x => x.username === username);
     if(member !== undefined) return of(member);
 
