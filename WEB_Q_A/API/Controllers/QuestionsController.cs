@@ -80,13 +80,6 @@ namespace API.Controllers
             return BadRequest("Failed to update the question");
         }
 
-        public ActionResult PostQuestions(QuestionDto questionDto)
-        {
-            for (QuestionDto questionDto: QuestionDto )
-            {
-
-            }
-        }
 
         [Authorize]
         [HttpPost]
