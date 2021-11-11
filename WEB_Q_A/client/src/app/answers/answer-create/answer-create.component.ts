@@ -6,7 +6,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { take } from 'rxjs/operators';
 import { Answer } from 'src/app/_models/answer';
@@ -52,16 +52,19 @@ export class AnswerCreateComponent implements OnInit {
     if (this.user) {
       this.answer.questionId = this.questionId!;
       this.answer.username = this.user.username;
-      this.answerService.createAnswer(this.answer)?.subscribe(() => {
-        this.toastr.success('Answer created successfully');
-        this.router
-          .navigateByUrl('/', { skipLocationChange: true })
-          .then(() => {
-            this.router.navigate(['/questions/'+this.questionId]);
-          });
-      }, error => {
-        this.toastr.error(error);
-      });
+      this.answerService.createAnswer(this.answer)?.subscribe(
+        () => {
+          this.toastr.success('Answer created successfully');
+          //this.questionService.getQuestions(true);
+          this.router.navigateByUrl('/questions', { skipLocationChange: true })
+            .then(() => {
+              this.router.navigate(['/questions/' + this.questionId]);
+            });
+        },
+        (error) => {
+          this.toastr.error(error);
+        }
+      );
     }
   }
 }

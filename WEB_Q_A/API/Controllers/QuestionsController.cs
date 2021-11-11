@@ -2,6 +2,8 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using API.DTOs;
 using API.Entities;
+using API.Extensions;
+using API.Helpers;
 using API.Interfaces;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
@@ -23,26 +25,34 @@ namespace API.Controllers
 
         [AllowAnonymous]
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<QuestionDto>>> GetQuestions()
+        public async Task<ActionResult<IEnumerable<QuestionDto>>> GetQuestions([FromQuery]UserParams userParams)
         {
-            var questions = await _questionRepository.GetQuestionsAsync();
+            var questions = await _questionRepository.GetQuestionsAsync(userParams);
+            Response.AddPaginationHeader(questions.CurrentPage, questions.PageSize,
+             questions.TotalCount, questions.TotalPages);
             return Ok(questions);
         }
 
         // api/questions/user/bob
         [Authorize]
         [HttpGet("user/{username}")]
-        public async Task<ActionResult<IEnumerable<QuestionDto>>> GetUserQuestions(string username)
+        public async Task<ActionResult<IEnumerable<QuestionDto>>> GetUserQuestions(string username,
+         [FromQuery]UserParams userParams)
         {
-            var questions = await _questionRepository.GetQuestionsByUsernameAsync(username);
+            var questions = await _questionRepository.GetQuestionsByUsernameAsync(username, userParams);
+            Response.AddPaginationHeader(questions.CurrentPage, questions.PageSize,
+             questions.TotalCount, questions.TotalPages);
             return Ok(questions);
         }
 
         [Authorize]
         [HttpGet("user-answered/{username}")]
-        public async Task<ActionResult<IEnumerable<QuestionDto>>> GetUserQuestionsAnswered(string username)
+        public async Task<ActionResult<IEnumerable<QuestionDto>>> GetUserQuestionsAnswered(string username,
+         [FromQuery]UserParams userParams)
         {
-            var questions = await _questionRepository.GetUserQuestionsAnsweredAsync(username);
+            var questions = await _questionRepository.GetUserQuestionsAnsweredAsync(username, userParams);
+            Response.AddPaginationHeader(questions.CurrentPage, questions.PageSize,
+             questions.TotalCount, questions.TotalPages);
             return Ok(questions);
         }
 
@@ -71,7 +81,7 @@ namespace API.Controllers
         [Authorize]
         [HttpPut("{id}")]
         public async Task<ActionResult> UpdateQuestion(int id, QuestionUpdateDto questionUpdateDto){
-            var question = await _questionRepository.GetEQuestionByIdAsync(id);
+            var question = await _questionRepository.GetQuestionEntityByIdAsync(id);
             _mapper.Map(questionUpdateDto, question);
             _questionRepository.Update(question);
 

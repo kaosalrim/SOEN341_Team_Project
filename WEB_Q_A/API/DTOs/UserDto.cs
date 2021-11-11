@@ -14,7 +14,7 @@ namespace API.DTOs
         public string LastName { get; set; }
         public string PhotoUrl { get; set; }
         public string Email { get; set; }
-        public ICollection<QuestionDto> Questions { get; set; }
+        //public ICollection<QuestionDto> Questions { get; set; }
         public int QuestionsAnswered { get; set; } = 0;
         public int QuestionsPosted { get; set; } = 0;
         public ICollection<UserVoteDto> UserVotes {get; set;}

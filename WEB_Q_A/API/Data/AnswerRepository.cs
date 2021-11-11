@@ -21,12 +21,12 @@ namespace API.Data
             _context = context;
         }
 
-        public async Task<Answer> GetEAnswerByIdAsync(int id)
+        public async Task<Answer> GetAnswerEntityByIdAsync(int id)
         {
             return await _context.Answers.FindAsync(id);
         }
 
-        public async Task<IEnumerable<Answer>> GetEAnswersByUsernameAsync(string username)
+        public async Task<IEnumerable<Answer>> GetAnswerEntitiesByUsernameAsync(string username)
         {
             return await _context.Answers
             .Include(p => p.Question)
@@ -34,7 +34,7 @@ namespace API.Data
             .ToListAsync();
         }
 
-        public async Task<IEnumerable<Answer>> GetEAnswersAsync()
+        public async Task<IEnumerable<Answer>> GetAnswerEntitiesAsync()
         {
             return await _context.Answers
             .Include(p => p.Question)
@@ -70,6 +70,20 @@ namespace API.Data
             _context.Entry(answer).State = EntityState.Modified;
         }
 
+        public void UpdateBestAnswer(Answer answer)
+        {
+            _context.Entry(answer).State = EntityState.Modified;
+            if (answer.IsBestAnswer)
+            {
+                var answers = _context.Answers.Where(x => x.QuestionId == answer.QuestionId && x.Id != answer.Id);
+                foreach (var ans in answers)
+                {
+                    ans.IsBestAnswer = false;
+                    _context.Entry(ans).State = EntityState.Modified;
+                }
+            }
+        }
+
         public void UpdateRank(Answer answer, int userId, bool upvote)
         {
             _context.Entry(answer).State = EntityState.Modified;
@@ -81,9 +95,11 @@ namespace API.Data
                     AppUserId = userId
                 }).State = EntityState.Added;
             }
-            else {
+            else
+            {
                 var vote = _context.UserVotes.SingleOrDefault(x => x.AnswerId == answer.Id && x.AppUserId == userId);
-                if (vote != null){
+                if (vote != null)
+                {
                     _context.Entry(vote).State = EntityState.Deleted;
                 }
             }
