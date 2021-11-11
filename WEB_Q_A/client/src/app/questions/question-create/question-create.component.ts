@@ -42,6 +42,7 @@ export class QuestionCreateComponent implements OnInit {
           .then(() => {
             this.router.navigate(['/questions/'+ question.id]);
           });
+          //this.questionService.addNewQuestion(question); 
       }, error => {
         this.toastr.error(error);
       });
