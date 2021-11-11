@@ -8,10 +8,20 @@
             <button *ngIf="user" class="btn btn-outline-primary" routerLink='/question/create'>Ask a question</button>
         <button *ngIf="!user" class="btn btn-outline-primary" routerLink='/register'>Ask a question</button>
         </div>
-    </div>   
+    </div>
+    
+    <div class="d-flex justtify-content-center" *ngIf="pagination && pagination.totalPages > 1">
+        <pagination [boundaryLinks]="true" [totalItems]="pagination.totalItems"
+            [itemsPerPage]="pagination.itemsPerPage"
+            [rotate]="rotate" [maxSize]="maxSize"
+            [(ngModel)]="pagination.currentPage"
+            (pageChanged)="pageChanged($event)"
+            previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;"> 
+        </pagination>
+    </div>
     
     <div class="card-deck"  style="padding-right: 5%;">
-        <ng-container *ngFor="let question of questions$ | async" >
+        <ng-container *ngFor="let question of questions" >
             <app-question-card [question]="question" [isCurrentUser]="isUserSpecific" [isUserAnswered]="isUserAnswered"></app-question-card>
         </ng-container>
         

@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
 import { take } from 'rxjs/operators';
+import { Pagination } from 'src/app/_models/pagination';
 import { Question } from 'src/app/_models/question';
 import { User } from 'src/app/_models/user';
 import { AccountService } from 'src/app/_services/account.service';
@@ -17,36 +17,59 @@ export class QuestionListComponent implements OnInit {
   @Input()
   isUserAnswered: boolean = false;
   @Input()
-  username: string = "";
-  // questions: Question[] = [];
-  questions$!: Observable<Question[]>;
+  username: string = "";  
+  //questions$!: Observable<Question[]>;
   user?: User;
+  questions: Question[] = [];
+  pagination: Pagination = {} as Pagination;
+  pageNumber = 1;
+  pageSize = 5;
+  rotate = false;
+  maxSize = 5;
 
   constructor(private questionService: QuestionService, private accountService: AccountService) {
     this.accountService.currentUser$.pipe(take(1)).subscribe(user => this.user = user); 
     }
 
   ngOnInit(): void {
-    if (this.isUserSpecific){
+    this.load();    
+  }
+
+  private load() {
+    if (this.isUserSpecific) {
       if (this.isUserAnswered) {
         this.loadUserAnsweredQuestions(this.username);
       } else {
         this.loadUserQuestions(this.username);
-      }      
-    } else{
+      }
+    } else {
       this.loadQuestions();
-    }    
+    }
   }
 
   loadQuestions(){
-    this.questions$ = this.questionService.getQuestions();
+    this.questionService.getQuestions(this.pageNumber, this.pageSize).subscribe(response => {
+      this.questions = response.result;
+      this.pagination = response.pagination;
+    });
   }
 
   loadUserQuestions(username: string){
-    this.questions$ = this.questionService.getUserQuestions(username);
+    this.questionService.getUserQuestions(username,this.pageNumber, this.pageSize).subscribe(response => {
+      this.questions = response.result;
+      this.pagination = response.pagination;
+    });
   }
 
   loadUserAnsweredQuestions(username: string){
-    this.questions$ = this.questionService.getUserQuestionsAnswered(username);
+    this.questionService.getUserQuestionsAnswered(username,this.pageNumber, this.pageSize).subscribe(response => {
+      this.questions = response.result;
+      this.pagination = response.pagination;
+    });
+  }
+
+  pageChanged(event: any){
+    this.pageNumber = event.page;
+    this.load();
   }
 }

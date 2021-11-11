@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using API.DTOs;
 using API.Entities;
+using API.Helpers;
 
 namespace API.Interfaces
 {
@@ -10,13 +11,13 @@ namespace API.Interfaces
         void Update(Question question);
         void Create(Question question);
         Task<bool> SaveAllAsync();
-        Task<IEnumerable<Question>> GetEQuestionsAsync();
-        Task<Question> GetEQuestionByIdAsync(int id);
-        Task<IEnumerable<Question>> GetEQuestionsByUsernameAsync(string username);
-        Task<IEnumerable<QuestionDto>> GetQuestionsAsync();
+        Task<IEnumerable<Question>> GetQuestionEntitiesAsync();
+        Task<Question> GetQuestionEntityByIdAsync(int id);
+        Task<IEnumerable<Question>> GetQuestionEntitiesByUsernameAsync(string username);
+        Task<PagedList<QuestionDto>> GetQuestionsAsync(UserParams userParams);
         Task<QuestionDto> GetQuestionByIdAsync(int id);
-        Task<IEnumerable<QuestionDto>> GetQuestionsByUsernameAsync(string username);
-        Task<IEnumerable<QuestionDto>> GetUserQuestionsAnsweredAsync(string username);
+        Task<PagedList<QuestionDto>> GetQuestionsByUsernameAsync(string username, UserParams userParams);
+        Task<PagedList<QuestionDto>> GetUserQuestionsAnsweredAsync(string username, UserParams userParams);
         Task<PhotoDto> GetUserQuestionPhoto(string username);
         Task<string> GetUserQuestionRep(string username);
     }

@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using API.DTOs;
 using API.Entities;
+using API.Helpers;
 using API.Interfaces;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
@@ -21,19 +22,19 @@ namespace API.Data
             _context = context;
         }
 
-        public async Task<Question> GetEQuestionByIdAsync(int id)
+        public async Task<Question> GetQuestionEntityByIdAsync(int id)
         {
             return await _context.Questions.FindAsync(id);
         }
 
-        public async Task<IEnumerable<Question>> GetEQuestionsByUsernameAsync(string username)
+        public async Task<IEnumerable<Question>> GetQuestionEntitiesByUsernameAsync(string username)
         {
             return await _context.Questions
             .Include(p => p.Answers)
             .Where(x => x.AppUser.UserName == username).ToListAsync();
         }
 
-        public async Task<IEnumerable<Question>> GetEQuestionsAsync()
+        public async Task<IEnumerable<Question>> GetQuestionEntitiesAsync()
         {
             return await _context.Questions
             .Include(p => p.Answers)
@@ -47,24 +48,28 @@ namespace API.Data
             .SingleOrDefaultAsync();
         }
 
-        public async Task<IEnumerable<QuestionDto>> GetQuestionsByUsernameAsync(string username)
+        public async Task<PagedList<QuestionDto>> GetQuestionsByUsernameAsync(string username, UserParams userParams)
         {
-            return await _context.Questions.Where(u => u.AppUser.UserName == username)
+            var query = _context.Questions.Where(u => u.AppUser.UserName == username)
             .ProjectTo<QuestionDto>(_mapper.ConfigurationProvider)
-            .ToListAsync();
+            .OrderByDescending(x => x.DatePosted).AsNoTracking();
+            return await PagedList<QuestionDto>.CreateAsync(query, userParams.PageNumber, userParams.PageSize);
         }
-        public async Task<IEnumerable<QuestionDto>> GetUserQuestionsAnsweredAsync(string username)
+        public async Task<PagedList<QuestionDto>> GetUserQuestionsAnsweredAsync(string username, UserParams userParams)
         {
-            return await _context.Questions
+            var query = _context.Questions
             .Include(q => q.Answers)
             .Where(q => q.Answers.Any(a => a.AppUser.UserName == username))
             .ProjectTo<QuestionDto>(_mapper.ConfigurationProvider)
-            .ToListAsync();
+            .OrderByDescending(x => x.DatePosted).AsNoTracking();
+            return await PagedList<QuestionDto>.CreateAsync(query, userParams.PageNumber, userParams.PageSize);
         }
 
-        public async Task<IEnumerable<QuestionDto>> GetQuestionsAsync()
+        public async Task<PagedList<QuestionDto>> GetQuestionsAsync(UserParams userParams)
         {
-            return await _context.Questions.ProjectTo<QuestionDto>(_mapper.ConfigurationProvider).ToListAsync();
+            var query = _context.Questions.ProjectTo<QuestionDto>(_mapper.ConfigurationProvider)
+            .OrderByDescending(x => x.DatePosted).AsNoTracking();
+            return await PagedList<QuestionDto>.CreateAsync(query, userParams.PageNumber, userParams.PageSize);
         }
 
         public async Task<bool> SaveAllAsync()
@@ -87,7 +92,8 @@ namespace API.Data
             var user = await _context.Users
             .Include(p => p.Photo)
             .SingleOrDefaultAsync(u => u.UserName == username);
-            return new PhotoDto(){
+            return new PhotoDto()
+            {
                 Id = user.Photo?.Id,
                 Url = user.Photo?.Url
             };
