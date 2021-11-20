@@ -21,6 +21,7 @@ jobs:
       directories:
         - node_modules
     script:
+      - npm run test -- --watch=false --no-progress --browsers=ChromeHeadlessNoSandbox
       - ng build
   - name: back-end
     language: csharp
