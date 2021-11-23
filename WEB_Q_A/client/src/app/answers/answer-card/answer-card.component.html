@@ -12,7 +12,7 @@
             </div>
             <div class="row">
                 <div class="col">
-                    <p class="text-center fs-4">{{answer.rank}}</p> 
+                    <p class="text-center fs-4" *ngIf="answer">{{answer.rank}}</p> 
                 </div>  
             </div>
             <div class="row">
@@ -25,7 +25,7 @@
                 </div>   
             </div>
             <div class="row">
-                <div class="col">
+                <div class="col" *ngIf="answer">
                     <p class="text-center" *ngIf="answer.isBestAnswer">                       
                             <svg xmlns="http://www.w3.org/2000/svg" (click)="unAcceptAnswer()"
                             width="48" height="48" class="bi bi-check2 text-success" fill="currentColor" viewBox="0 0 16 16">
@@ -42,7 +42,7 @@
             </div>      
         </div>
         <div class="col-11 ps-0">
-            <div class="card-body">
+            <div class="card-body" *ngIf="answer">
                 <p class="card-text">{{ answer.answerDetails }}</p>
                 <p class="card-text"><small class="text-muted">
                     Posted on: {{ answer.datePosted   | date:'yyyy-MM-dd' }}</small></p>                

@@ -31,4 +31,5 @@ jobs:
       - cd WEB_Q_A/API
     script:
       - dotnet restore
+      - dotnet test
       - dotnet build

@@ -1,6 +1,6 @@
 <div class="card" routerLink='/questions/{{ question?.id}}'>
     <div class="row" >
-        <div class="col-md-1 d-flex align-items-center justify-content-center">
+        <div class="col-md-1 d-flex align-items-center justify-content-center" *ngIf="question">
             <p class="text-center" *ngIf="question.hasBestAnswer">
               <svg xmlns="http://www.w3.org/2000/svg" width="64" 
               height="64" class="bi bi-check2 text-success" fill="currentColor" viewBox="0 0 16 16">
@@ -8,8 +8,8 @@
             </svg></p>        
         </div>
         <div class="col-md-11">
-            <div class="card-body">
-                <h5 class="card-title">{{ question.questionTitle }}</h5>
+            <div class="card-body" *ngIf="question">
+                <h5 class="card-title" *ngIf="question">{{ question.questionTitle }}</h5>
                 <p class="card-text" style="width: 100%;">{{ question.questionDetails }}</p>
                 <p class="card-text"><small class="text-muted">
                     Posted on: {{ question.datePosted   | date:'yyyy-MM-dd' }}</small></p>
