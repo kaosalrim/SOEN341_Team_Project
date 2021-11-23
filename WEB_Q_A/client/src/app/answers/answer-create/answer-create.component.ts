@@ -14,6 +14,7 @@ import { User } from 'src/app/_models/user';
 import { AccountService } from 'src/app/_services/account.service';
 import { AnswerService } from 'src/app/_services/answer.service';
 import { environment } from 'src/environments/environment';
+import { AngularEditorConfig } from '@kolkov/angular-editor';
 
 @Component({
   selector: 'app-answer-create',
@@ -33,7 +34,22 @@ export class AnswerCreateComponent implements OnInit {
     if (this.editForm?.dirty) {
       $event.returnValue = true;
     }
-  }
+  }  
+
+  config: AngularEditorConfig = {
+    editable: true,
+    spellcheck: true,
+    height: '15rem',
+    minHeight: '5rem',
+    placeholder: 'Enter text here...',
+    translate: 'no',
+    defaultParagraphSeparator: 'p',
+    defaultFontName: 'Arial',
+    toolbarHiddenButtons: [
+      ['bold'],
+      ['insertVideo', 'insertImage', 'backgroundColor']
+      ]
+  };
 
   constructor(
     private accountService: AccountService,

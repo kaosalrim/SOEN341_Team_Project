@@ -13,6 +13,7 @@ import { Answer } from 'src/app/_models/answer';
 import { User } from 'src/app/_models/user';
 import { AccountService } from 'src/app/_services/account.service';
 import { AnswerService } from 'src/app/_services/answer.service';
+import { AngularEditorConfig } from '@kolkov/angular-editor';
 
 @Component({
   selector: 'app-answer-edit',
@@ -32,6 +33,20 @@ export class AnswerEditComponent implements OnInit {
       $event.returnValue = true;
     }
   }
+  config: AngularEditorConfig = {
+    editable: true,
+    spellcheck: true,
+    height: '15rem',
+    minHeight: '5rem',
+    placeholder: 'Enter text here...',
+    translate: 'no',
+    defaultParagraphSeparator: 'p',
+    defaultFontName: 'Arial',
+    toolbarHiddenButtons: [
+      ['bold'],
+      ['insertVideo', 'insertImage', 'backgroundColor']
+      ]
+  };
 
   constructor(
     private accountService: AccountService,

@@ -10,7 +10,7 @@
         <div class="col-md-11">
             <div class="card-body" *ngIf="question">
                 <h5 class="card-title" *ngIf="question">{{ question.questionTitle }}</h5>
-                <p class="card-text" style="width: 100%;">{{ question.questionDetails }}</p>
+                <div class="card-text" style="width: 100%;" [innerHTML]="question.questionDetails"></div>
                 <p class="card-text"><small class="text-muted">
                     Posted on: {{ question.datePosted   | date:'yyyy-MM-dd' }}</small></p>
                 <ng-container *ngIf="!isCurrentUser || isUserAnswered">

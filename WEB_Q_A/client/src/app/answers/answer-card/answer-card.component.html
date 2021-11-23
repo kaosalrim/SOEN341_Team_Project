@@ -43,7 +43,7 @@
         </div>
         <div class="col-11 ps-0">
             <div class="card-body" *ngIf="answer">
-                <p class="card-text">{{ answer.answerDetails }}</p>
+                <div class="card-text" [innerHTML]="answer.answerDetails"></div>
                 <p class="card-text"><small class="text-muted">
                     Posted on: {{ answer.datePosted   | date:'yyyy-MM-dd' }}</small></p>                
                 <span class="mr-2">Posted by: 
