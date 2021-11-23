@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { NavSideBarComponent } from './nav-side-bar.component';
 
 describe('NavSideBarComponent', () => {
@@ -8,7 +8,8 @@ describe('NavSideBarComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ NavSideBarComponent ]
+      declarations: [ NavSideBarComponent ],
+      imports: [HttpClientTestingModule]
     })
     .compileComponents();
   });
