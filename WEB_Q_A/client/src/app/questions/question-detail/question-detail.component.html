@@ -8,7 +8,7 @@
             <div class="card">
                     <div class="card-body">
                         <h3 class="card-title">{{ question.questionTitle }}</h3>
-                        <p class="card-text">{{ question.questionDetails }}</p>
+                        <div class="card-text" [innerHTML]="question.questionDetails"></div>
                         <p class="card-text"><small class="text-muted">Posted on: {{ question.datePosted   | date:'yyyy-MM-dd' }}</small></p>                
                         <span class="mr-2">Posted by: <img src="{{ question.userPhotoUrl || './assets/user.png' }}"
                              alt="" width="32" height="32" routerLink='/users/{{ question.username}}'/> 

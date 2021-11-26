@@ -7,6 +7,7 @@ import { Question } from 'src/app/_models/question';
 import { User } from 'src/app/_models/user';
 import { AccountService } from 'src/app/_services/account.service';
 import { QuestionService } from 'src/app/_services/question.service';
+import { AngularEditorConfig } from '@kolkov/angular-editor';
 
 @Component({
   selector: 'app-question-edit',
@@ -24,6 +25,20 @@ export class QuestionEditComponent implements OnInit {
       $event.returnValue = true;
     }
   }
+  config: AngularEditorConfig = {
+    editable: true,
+    spellcheck: true,
+    height: '15rem',
+    minHeight: '5rem',
+    placeholder: 'Enter text here...',
+    translate: 'no',
+    defaultParagraphSeparator: 'p',
+    defaultFontName: 'Arial',
+    toolbarHiddenButtons: [
+      ['bold'],
+      ['insertVideo', 'insertImage', 'backgroundColor']
+      ]
+  };
 
   constructor(private accountService: AccountService, private questionService: QuestionService,
      private route: ActivatedRoute, private toastr: ToastrService) {

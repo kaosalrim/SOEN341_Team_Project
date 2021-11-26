@@ -8,6 +8,7 @@ import { User } from 'src/app/_models/user';
 import { AccountService } from 'src/app/_services/account.service';
 import { QuestionService } from 'src/app/_services/question.service';
 import { environment } from 'src/environments/environment';
+import { AngularEditorConfig } from '@kolkov/angular-editor';
 
 @Component({
   selector: 'app-question-create',
@@ -19,6 +20,20 @@ export class QuestionCreateComponent implements OnInit {
   question: Question = {} as Question;
   user?: User;
   baseUrl = environment.apiUrl;
+  config: AngularEditorConfig = {
+    editable: true,
+    spellcheck: true,
+    height: '15rem',
+    minHeight: '5rem',
+    placeholder: 'Enter text here...',
+    translate: 'no',
+    defaultParagraphSeparator: 'p',
+    defaultFontName: 'Arial',
+    toolbarHiddenButtons: [
+      ['bold'],
+      ['insertVideo', 'insertImage', 'backgroundColor']
+      ]
+  };
 
   constructor(private accountService: AccountService,
     private questionService: QuestionService,

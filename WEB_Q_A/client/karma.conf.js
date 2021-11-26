@@ -3,13 +3,13 @@
 
 module.exports = function (config) {
   config.set({
-    browsers: [ 'MyHeadlessChrome'],
-    customLaunchers: {
-      MyHeadlessChrome: {
-        base: 'ChromeHeadless',
-        flags: ['--disable-translate', '--disable-extensions', '--remote-debugging-port=9223', '--no-sandbox']
-      }
-    },
+    // browsers: [ 'MyHeadlessChrome'],
+    // customLaunchers: {
+    //   MyHeadlessChrome: {
+    //     base: 'ChromeHeadless',
+    //     flags: ['--disable-translate', '--disable-extensions', '--remote-debugging-port=9223', '--no-sandbox']
+    //   }
+    // },
     basePath: '',
     frameworks: ['jasmine', '@angular-devkit/build-angular'],
     plugins: [
@@ -40,6 +40,12 @@ module.exports = function (config) {
       ]
     },
     reporters: ['progress', 'kjhtml'],
+    customLaunchers: {
+      ChromeHeadlessNoSandbox: {
+        base: 'ChromeHeadless',
+        flags: ['--no-sandbox']
+      }
+    },
     port: 9876,
     colors: true,
     logLevel: config.LOG_INFO,

@@ -18,7 +18,10 @@
             </div>
             <div class="card-body">
                 <h3>Question details:</h3>
-              <textarea class="form-control" [(ngModel)]="question.questionDetails" name="questionDetails" rows="15"></textarea>
+              <!-- <textarea class="form-control" [(ngModel)]="question.questionDetails" name="questionDetails" rows="15"></textarea> -->
+              <angular-editor 
+                [(ngModel)]="question.questionDetails" [config]="config" 
+                name="questionDetails"></angular-editor>
             </div>
             <div class="card-footer">
               <button class="btn-success" type="submit" [disabled]="!editForm.dirty">Post question</button>
