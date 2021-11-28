@@ -14,11 +14,9 @@ namespace API.Controllers
         private readonly IAnswerRepository _answerRepository;
         private readonly IMapper _mapper;
         private readonly IUserRepository _userRepository;
-        private readonly IQuestionRepository _questionRepository;
         public AnswersController(IAnswerRepository answerRepository, IMapper mapper,
-         IUserRepository userRepository, IQuestionRepository questionRepository)
+         IUserRepository userRepository)
         {
-            _questionRepository = questionRepository;
             _userRepository = userRepository;
             _mapper = mapper;
             _answerRepository = answerRepository;
@@ -72,13 +70,12 @@ namespace API.Controllers
         public async Task<ActionResult> UpdateAnswerRank(int id, bool upvote, string username, AnswerUpdateDto answerUpdateDto)
         {
             var user = await _userRepository.GetUserByUsernameAsync(username);
-            
+
             if (user == null) return BadRequest("Failed to update the answer");
 
             var votes = user.UserVotes.ToList().Any(v => v.AnswerId == id && v.AppUserId == user.Id);
             if(votes && upvote) return BadRequest("User already voted.");
             if(!votes && !upvote) return BadRequest("User never voted.");
-            
 
             var answer = await _answerRepository.GetAnswerEntityByIdAsync(id);
             _mapper.Map(answerUpdateDto, answer);
@@ -88,7 +85,6 @@ namespace API.Controllers
 
             return BadRequest("Failed to update the answer");
         }
-
 
         [Authorize]
         [HttpPost]

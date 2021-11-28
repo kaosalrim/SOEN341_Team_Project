@@ -7,13 +7,13 @@ namespace API.DTOs
     {
         public int Id { get; set; }
         public int Rank { get; set; }
-        public bool IsBestAnswer { get; set; }  
-        [Required]    
-        public string AnswerDetails { get; set; }        
-        public DateTime DatePosted { get; set; }  
-        [Required]    
+        public bool IsBestAnswer { get; set; }
+        [Required]
+        public string AnswerDetails { get; set; }
+        public DateTime DatePosted { get; set; }
+        [Required]
         public int QuestionId { get; set; }
-        [Required] 
+        [Required]
         public string Username { get; set; }
         public string UserPhotoUrl { get; set; }
         public int UserRep { get; set; } = 0;

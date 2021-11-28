@@ -13,10 +13,8 @@ namespace API.Extensions
     {
         public static IServiceCollection AddIdentityServices(this IServiceCollection services, IConfiguration config)
         {
-            services.AddIdentityCore<AppUser>(opt =>
-            {
-                opt.Password.RequireNonAlphanumeric = false;
-            }).AddRoles<AppRole>().AddRoleManager<RoleManager<AppRole>>()
+            services.AddIdentityCore<AppUser>(opt => opt.Password.RequireNonAlphanumeric = false)
+            .AddRoles<AppRole>().AddRoleManager<RoleManager<AppRole>>()
             .AddSignInManager<SignInManager<AppUser>>()
             .AddRoleValidator<RoleValidator<AppRole>>()
             .AddEntityFrameworkStores<DataContext>();
@@ -41,6 +39,5 @@ namespace API.Extensions
 
             return services;
         }
-
     }
 }

@@ -4,9 +4,9 @@ namespace API.DTOs
 {
     public class AnswerUpdateDto
     {
-        public bool IsBestAnswer { get; set; }  
-        [Required]    
-        public string AnswerDetails { get; set; } 
+        public bool IsBestAnswer { get; set; }
+        [Required]
+        public string AnswerDetails { get; set; }
         public int Rank { get; set; }
     }
 }
