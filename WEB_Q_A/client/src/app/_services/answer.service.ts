@@ -29,6 +29,13 @@ export class AnswerService {
     return null;
   }
 
+  updateBestAnswer(answer?: Answer){
+    if (answer) {
+      return this.http.put(this.baseUrl + "answers/updatebestanswer/" + answer.id, answer);
+    }
+    return null;
+  }
+
   updateAnswerRank(upvote: boolean, username: string, answer?: Answer){
     if (answer) {
       return this.http.put(this.baseUrl + "answers/updaterank/" + answer.id + "/" + upvote + "/" + username, answer);

@@ -24,6 +24,8 @@ namespace API.Helpers
 
             CreateMap<Question, QuestionDto>()
             .ForMember(dest => dest.Username, opt => opt.MapFrom(src => src.AppUser.UserName))
+            .ForMember(dest => dest.Answers, opt => opt.MapFrom(
+                src => src.Answers.OrderByDescending(a => a.IsBestAnswer).ThenByDescending(a => a.Rank)))
             .ForMember(dest => dest.HasBestAnswer, opt => opt.MapFrom(src => src.Answers.Any(a => a.IsBestAnswer)))
             .ForMember(dest => dest.UserPhotoUrl, opt => opt.MapFrom(src => src.AppUser.Photo.Url))
             .ForMember(dest => dest.UserRep, opt => opt.MapFrom(

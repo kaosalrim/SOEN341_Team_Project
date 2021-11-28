@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Linq;
 using System.Threading.Tasks;
 using API.DTOs;
@@ -15,19 +14,15 @@ namespace API.Controllers
         private readonly IAnswerRepository _answerRepository;
         private readonly IMapper _mapper;
         private readonly IUserRepository _userRepository;
-        public AnswersController(IAnswerRepository answerRepository, IMapper mapper, IUserRepository userRepository)
+        private readonly IQuestionRepository _questionRepository;
+        public AnswersController(IAnswerRepository answerRepository, IMapper mapper,
+         IUserRepository userRepository, IQuestionRepository questionRepository)
         {
+            _questionRepository = questionRepository;
             _userRepository = userRepository;
             _mapper = mapper;
             _answerRepository = answerRepository;
         }
-
-        // [HttpGet]
-        // public async Task<ActionResult<IEnumerable<QuestionDto>>> GetAnswers()
-        // {
-        //     var answers = await _answerRepository.GetAnswersAsync();
-        //     return Ok(answers);
-        // }
 
         // api/answers/user/bob
         [Authorize]
@@ -49,9 +44,23 @@ namespace API.Controllers
         [HttpPut("{id}")]
         public async Task<ActionResult> UpdateAnswer(int id, AnswerUpdateDto answerUpdateDto)
         {
-            var answer = await _answerRepository.GetEAnswerByIdAsync(id);
+            var answer = await _answerRepository.GetAnswerEntityByIdAsync(id);
             _mapper.Map(answerUpdateDto, answer);
             _answerRepository.Update(answer);
+
+            if (await _answerRepository.SaveAllAsync()) return NoContent();
+
+            return BadRequest("Failed to update the answer");
+        }
+
+        [Authorize]
+        [HttpPut("updatebestanswer/{id}")]
+        public async Task<ActionResult> UpdateBestAnswer(int id, AnswerUpdateDto answerUpdateDto)
+        {
+            var answer = await _answerRepository.GetAnswerEntityByIdAsync(id);
+
+            _mapper.Map(answerUpdateDto, answer);
+            _answerRepository.UpdateBestAnswer(answer);
 
             if (await _answerRepository.SaveAllAsync()) return NoContent();
 
@@ -71,7 +80,7 @@ namespace API.Controllers
             if(!votes && !upvote) return BadRequest("User never voted.");
             
 
-            var answer = await _answerRepository.GetEAnswerByIdAsync(id);
+            var answer = await _answerRepository.GetAnswerEntityByIdAsync(id);
             _mapper.Map(answerUpdateDto, answer);
             _answerRepository.UpdateRank(answer, user.Id, upvote);
 
@@ -79,6 +88,7 @@ namespace API.Controllers
 
             return BadRequest("Failed to update the answer");
         }
+
 
         [Authorize]
         [HttpPost]

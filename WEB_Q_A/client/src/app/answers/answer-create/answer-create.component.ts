@@ -6,7 +6,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { take } from 'rxjs/operators';
 import { Answer } from 'src/app/_models/answer';
@@ -14,6 +14,7 @@ import { User } from 'src/app/_models/user';
 import { AccountService } from 'src/app/_services/account.service';
 import { AnswerService } from 'src/app/_services/answer.service';
 import { environment } from 'src/environments/environment';
+import { AngularEditorConfig } from '@kolkov/angular-editor';
 
 @Component({
   selector: 'app-answer-create',
@@ -33,7 +34,22 @@ export class AnswerCreateComponent implements OnInit {
     if (this.editForm?.dirty) {
       $event.returnValue = true;
     }
-  }
+  }  
+
+  config: AngularEditorConfig = {
+    editable: true,
+    spellcheck: true,
+    height: '15rem',
+    minHeight: '5rem',
+    placeholder: 'Enter text here...',
+    translate: 'no',
+    defaultParagraphSeparator: 'p',
+    defaultFontName: 'Arial',
+    toolbarHiddenButtons: [
+      ['bold'],
+      ['insertVideo', 'insertImage', 'backgroundColor']
+      ]
+  };
 
   constructor(
     private accountService: AccountService,
@@ -52,16 +68,19 @@ export class AnswerCreateComponent implements OnInit {
     if (this.user) {
       this.answer.questionId = this.questionId!;
       this.answer.username = this.user.username;
-      this.answerService.createAnswer(this.answer)?.subscribe(() => {
-        this.toastr.success('Answer created successfully');
-        this.router
-          .navigateByUrl('/', { skipLocationChange: true })
-          .then(() => {
-            this.router.navigate(['/questions/'+this.questionId]);
-          });
-      }, error => {
-        this.toastr.error(error);
-      });
+      this.answerService.createAnswer(this.answer)?.subscribe(
+        () => {
+          this.toastr.success('Answer created successfully');
+          //this.questionService.getQuestions(true);
+          this.router.navigateByUrl('/questions', { skipLocationChange: true })
+            .then(() => {
+              this.router.navigate(['/questions/' + this.questionId]);
+            });
+        },
+        (error) => {
+          this.toastr.error(error);
+        }
+      );
     }
   }
 }
