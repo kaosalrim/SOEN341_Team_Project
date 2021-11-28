@@ -11,7 +11,7 @@ namespace API.Extensions
             var d1 = DateTime.Now;
             var span = d1 - d2;
 
-            MemberSince.Months = 12 * (d1.Year - d2.Year) + (d1.Month - d2.Month);
+            MemberSince.Months = (12 * (d1.Year - d2.Year)) + (d1.Month - d2.Month);
 
             //month may need to be decremented because the above calculates the ceiling of the months, not the floor.
             //to do so we increase d2 by the same number of months and compare.

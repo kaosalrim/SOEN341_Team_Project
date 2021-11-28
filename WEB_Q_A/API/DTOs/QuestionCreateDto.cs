@@ -8,7 +8,7 @@ namespace API.DTOs
         public string QuestionTitle { get; set; }
         [Required]
         public string QuestionDetails { get; set; }
-        [Required] 
+        [Required]
         public string Username { get; set; }
         [Required]
         public int AppUserId { get; set; }

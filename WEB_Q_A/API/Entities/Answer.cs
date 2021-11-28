@@ -8,11 +8,11 @@ namespace API.Entities
     {
         public int Id { get; set; }
         public int Rank { get; set; } = 0;
-        public bool IsBestAnswer { get; set; } = false;        
-        public string AnswerDetails { get; set; }        
-        public DateTime DatePosted { get; set; } = DateTime.Now;       
+        public bool IsBestAnswer { get; set; } = false;
+        public string AnswerDetails { get; set; }
+        public DateTime DatePosted { get; set; } = DateTime.Now;
         public Question Question { get; set; }
-        public int QuestionId { get; set; }       
+        public int QuestionId { get; set; }
         public AppUser AppUser  { get; set; }
         public int AppUserId { get; set; }
     }

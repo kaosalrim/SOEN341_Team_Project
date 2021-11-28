@@ -6,10 +6,10 @@ namespace API.DTOs
 {
     public class QuestionDto
     {
-        public int Id { get; set; }  
+        public int Id { get; set; }
         [Required]
-        public string QuestionTitle { get; set; } 
-        [Required] 
+        public string QuestionTitle { get; set; }
+        [Required]
         public string QuestionDetails { get; set; }
         public DateTime DatePosted { get; set; }
         public ICollection<AnswerDto> Answers { get; set; }

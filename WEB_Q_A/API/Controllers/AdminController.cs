@@ -22,7 +22,7 @@ namespace API.Controllers
         {
             var users = await _userManager.Users.Include(r => r.UserRoles)
             .ThenInclude(r => r.Role).OrderBy(u => u.UserName)
-            .Select(u => new{ 
+            .Select(u => new{
                 u.Id,
                 Username = u.UserName,
                 Roles = u.UserRoles.Select(r => r.Role.Name).ToList()
