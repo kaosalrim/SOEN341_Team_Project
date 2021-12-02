@@ -13,8 +13,8 @@ namespace API
     {
         private readonly IConfiguration _config;
 
-        public bool ValidateIssuer { get; private set; }
-        public bool ValidateAudience { get; private set; }
+        public bool ValidateIssuer { get; }
+        public bool ValidateAudience { get; }
 
         public Startup(IConfiguration config)
         {
@@ -27,16 +27,13 @@ namespace API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddApplicationServices(_config);
-            
+
             //services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(options => options.LoginPath = "/api/users/Login");
-                        
+
             services.AddControllers();
             services.AddCors();
             services.AddIdentityServices(_config);
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "API", Version = "v1" });
-            });
+            services.AddSwaggerGen(c => c.SwaggerDoc("v1", new OpenApiInfo { Title = "API", Version = "v1" }));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -46,7 +43,6 @@ namespace API
             {
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "API v1"));
-               
             }
 
             app.UseMiddleware<ExceptionMiddleware>();
@@ -60,10 +56,7 @@ namespace API
             app.UseAuthentication();
             app.UseAuthorization();
 
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-            });
+            app.UseEndpoints(endpoints => endpoints.MapControllers());
         }
     }
 }

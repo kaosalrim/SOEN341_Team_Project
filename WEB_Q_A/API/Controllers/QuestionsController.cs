@@ -93,7 +93,6 @@ namespace API.Controllers
         [Authorize]
         [HttpPost]
         public async Task<ActionResult<QuestionDto>> CreateQuestion(QuestionCreateDto questionCreateDto){
-
             var user = await _userRepository.GetUserByUsernameAsync(questionCreateDto.Username);
 
             if (user == null) return BadRequest("Failed to create the question");
@@ -106,7 +105,6 @@ namespace API.Controllers
             _questionRepository.Create(question);
 
             if (await _questionRepository.SaveAllAsync()) {
-                
                 return await _questionRepository.GetQuestionByIdAsync(question.Id);
             }
 
