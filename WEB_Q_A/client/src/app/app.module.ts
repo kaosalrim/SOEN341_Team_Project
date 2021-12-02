@@ -14,7 +14,6 @@ import { QuestionDetailComponent } from './questions/question-detail/question-de
 import { TopicsComponent } from './topics/topics.component';
 import { AboutComponent } from './about/about.component';
 import { SharedModule } from './_modules/shared.module';
-import { TestErrorsComponent } from './errors/test-errors/test-errors.component';
 import { ErrorInterceptor } from './_interceptors/error.interceptor';
 import { NotFoundComponent } from './errors/not-found/not-found.component';
 import { ServerErrorComponent } from './errors/server-error/server-error.component';
@@ -43,7 +42,6 @@ import { TextInputComponent } from './_forms/text-input/text-input.component';
     QuestionDetailComponent,
     TopicsComponent,
     AboutComponent,
-    TestErrorsComponent,
     NotFoundComponent,
     ServerErrorComponent,
     QuestionCardComponent,
