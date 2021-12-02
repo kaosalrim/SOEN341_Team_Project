@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { NotFoundComponent } from './errors/not-found/not-found.component';
 import { ServerErrorComponent } from './errors/server-error/server-error.component';
-import { TestErrorsComponent } from './errors/test-errors/test-errors.component';
 import { TopicsComponent } from './topics/topics.component';
 import { QuestionDetailComponent } from './questions/question-detail/question-detail.component';
 import { QuestionListComponent } from './questions/question-list/question-list.component';
@@ -34,7 +33,6 @@ const routes: Routes = [
   { path: 'topics', component: TopicsComponent },
   { path: 'register', component: HomeComponent },
   { path: 'about', component: AboutComponent },
-  { path: 'errors', component: TestErrorsComponent },
   { path: 'not-found', component: NotFoundComponent },
   { path: 'server-error', component: ServerErrorComponent },
   { path: '**', component: NotFoundComponent, pathMatch: 'full' },

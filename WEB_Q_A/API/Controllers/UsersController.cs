@@ -4,7 +4,6 @@ using API.DTOs;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using API.Interfaces;
-using AutoMapper;
 
 namespace API.Controllers
 {

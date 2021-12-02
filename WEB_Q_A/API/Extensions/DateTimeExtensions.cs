@@ -31,7 +31,6 @@ namespace API.Extensions
             else
             {
                 var md1 = new DateTime(d1.Year, d1.Month, d1.Day);
-                // Fixed to use d2.Day instead of d1.Day
                 var md2 = new DateTime(d2.Year, d2.Month, d2.Day);
                 var mDays = (int)(md1 - md2).TotalDays;
 

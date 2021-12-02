@@ -47,16 +47,6 @@ namespace API.Controllers
             var result = await _signInManager.CheckPasswordSignInAsync(user, loginDto.Password, false);
             if (!result.Succeeded) return Unauthorized();
 
-            // var claims = new List<Claim>();
-            // claims.Add(new Claim("username", loginDto.UserName));
-            // claims.Add(new Claim("email", user.Email));
-            // claims.Add(new Claim("FirstName", user.FirstName));
-            // claims.Add(new Claim("LastName", user.LastName));
-            // claims.Add(new Claim("DateJoined", user.DateJoined.ToString("s")));
-            // var claimIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
-            // var claimPrincipal = new ClaimsPrincipal(claimIdentity);
-            // await HttpContext.SignInAsync(claimPrincipal);
-
             return await MapUserToDto(user);
         }
 
