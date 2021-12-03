@@ -4,30 +4,32 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { ToastrModule } from 'ngx-toastr';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
-import { HttpClientModule} from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { AngularEditorModule } from '@kolkov/angular-editor';
-
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 @NgModule({
   declarations: [],
   imports: [
-    CommonModule,    
+    CommonModule,
     BsDropdownModule.forRoot(),
     ToastrModule.forRoot({
-      positionClass: 'toast-bottom-right'
+      positionClass: 'toast-bottom-right',
     }),
     TabsModule.forRoot(),
     PaginationModule.forRoot(),
     HttpClientModule,
-    AngularEditorModule
+    AngularEditorModule,
+    ModalModule.forRoot()
   ],
   exports: [
-    BsDropdownModule, 
+    BsDropdownModule,
     ToastrModule,
     TabsModule,
     PaginationModule,
     HttpClientModule,
-    AngularEditorModule
-  ]
+    AngularEditorModule,
+    ModalModule
+  ],
 })
-export class SharedModule { }
+export class SharedModule {}

@@ -11,15 +11,13 @@ namespace API.Controllers
 {
     public class AnswersController : BaseApiController
     {
-        private readonly IAnswerRepository _answerRepository;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
-        private readonly IUserRepository _userRepository;
-        public AnswersController(IAnswerRepository answerRepository, IMapper mapper,
-         IUserRepository userRepository)
+
+        public AnswersController(IUnitOfWork unitOfWork, IMapper mapper)
         {
-            _userRepository = userRepository;
+            _unitOfWork = unitOfWork;
             _mapper = mapper;
-            _answerRepository = answerRepository;
         }
 
         // api/answers/user/bob
@@ -27,7 +25,7 @@ namespace API.Controllers
         [HttpGet("user/{username}")]
         public async Task<ActionResult<AnswerDto>> GetUserAnswers(string username)
         {
-            var answers = await _answerRepository.GetAnswersByUsernameAsync(username);
+            var answers = await _unitOfWork.AnswerRepository.GetAnswersByUsernameAsync(username);
             return Ok(answers);
         }
 
@@ -35,18 +33,18 @@ namespace API.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<AnswerDto>> GetAnswer(int id)
         {
-            return await _answerRepository.GetAnswerByIdAsync(id);
+            return await _unitOfWork.AnswerRepository.GetAnswerByIdAsync(id);
         }
 
         [Authorize]
         [HttpPut("{id}")]
         public async Task<ActionResult> UpdateAnswer(int id, AnswerUpdateDto answerUpdateDto)
         {
-            var answer = await _answerRepository.GetAnswerEntityByIdAsync(id);
+            var answer = await _unitOfWork.AnswerRepository.GetAnswerEntityByIdAsync(id);
             _mapper.Map(answerUpdateDto, answer);
-            _answerRepository.Update(answer);
+            _unitOfWork.AnswerRepository.Update(answer);
 
-            if (await _answerRepository.SaveAllAsync()) return NoContent();
+            if (await _unitOfWork.Complete()) return NoContent();
 
             return BadRequest("Failed to update the answer");
         }
@@ -55,12 +53,12 @@ namespace API.Controllers
         [HttpPut("updatebestanswer/{id}")]
         public async Task<ActionResult> UpdateBestAnswer(int id, AnswerUpdateDto answerUpdateDto)
         {
-            var answer = await _answerRepository.GetAnswerEntityByIdAsync(id);
+            var answer = await _unitOfWork.AnswerRepository.GetAnswerEntityByIdAsync(id);
 
             _mapper.Map(answerUpdateDto, answer);
-            _answerRepository.UpdateBestAnswer(answer);
+            _unitOfWork.AnswerRepository.UpdateBestAnswer(answer);
 
-            if (await _answerRepository.SaveAllAsync()) return NoContent();
+            if (await _unitOfWork.Complete()) return NoContent();
 
             return BadRequest("Failed to update the answer");
         }
@@ -69,7 +67,7 @@ namespace API.Controllers
         [HttpPut("updaterank/{id}/{upvote}/{username}")]
         public async Task<ActionResult> UpdateAnswerRank(int id, bool upvote, string username, AnswerUpdateDto answerUpdateDto)
         {
-            var user = await _userRepository.GetUserByUsernameAsync(username);
+            var user = await _unitOfWork.UserRepository.GetUserByUsernameAsync(username);
 
             if (user == null) return BadRequest("Failed to update the answer");
 
@@ -77,11 +75,11 @@ namespace API.Controllers
             if(votes && upvote) return BadRequest("User already voted.");
             if(!votes && !upvote) return BadRequest("User never voted.");
 
-            var answer = await _answerRepository.GetAnswerEntityByIdAsync(id);
+            var answer = await _unitOfWork.AnswerRepository.GetAnswerEntityByIdAsync(id);
             _mapper.Map(answerUpdateDto, answer);
-            _answerRepository.UpdateRank(answer, user.Id, upvote);
+            _unitOfWork.AnswerRepository.UpdateRank(answer, user.Id, upvote);
 
-            if (await _answerRepository.SaveAllAsync()) return NoContent();
+            if (await _unitOfWork.Complete()) return NoContent();
 
             return BadRequest("Failed to update the answer");
         }
@@ -90,10 +88,10 @@ namespace API.Controllers
         [HttpPost]
         public async Task<ActionResult> CreateAnswer(AnswerCreateDto answerCreateDto)
         {
-            var questionExists = await _answerRepository.IsQuestionExists(answerCreateDto.QuestionId);
+            var questionExists = await _unitOfWork.AnswerRepository.IsQuestionExists(answerCreateDto.QuestionId);
             if (!questionExists) return BadRequest("Failed to create the answer");
 
-            var user = await _userRepository.GetUserByUsernameAsync(answerCreateDto.Username);
+            var user = await _unitOfWork.UserRepository.GetUserByUsernameAsync(answerCreateDto.Username);
 
             if (user == null) return BadRequest("Failed to create the answer");
 
@@ -102,9 +100,9 @@ namespace API.Controllers
 
             _mapper.Map(answerCreateDto, answer);
 
-            _answerRepository.Create(answer);
+            _unitOfWork.AnswerRepository.Create(answer);
 
-            if (await _answerRepository.SaveAllAsync()) return NoContent();
+            if (await _unitOfWork.Complete()) return NoContent();
 
             return BadRequest("Failed to update the answer");
         }

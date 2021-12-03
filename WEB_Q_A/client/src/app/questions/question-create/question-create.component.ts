@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -20,6 +20,11 @@ export class QuestionCreateComponent implements OnInit {
   question: Question = {} as Question;
   user?: User;
   baseUrl = environment.apiUrl;
+  @HostListener('window:beforeunload', ['$event']) unloadNotification($event: any){
+    if(this.editForm?.dirty){
+      $event.returnValue = true;
+    }
+  }
   config: AngularEditorConfig = {
     editable: true,
     spellcheck: true,

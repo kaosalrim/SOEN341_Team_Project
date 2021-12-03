@@ -31,6 +31,7 @@ import { AnswerEditComponent } from './answers/answer-edit/answer-edit.component
 import { AnswerCreateComponent } from './answers/answer-create/answer-create.component';
 import { QuestionCreateComponent } from './questions/question-create/question-create.component';
 import { TextInputComponent } from './_forms/text-input/text-input.component';
+import { ConfirmDialogComponent } from './modals/confirm-dialog/confirm-dialog.component';
 
 @NgModule({
   declarations: [
@@ -53,6 +54,7 @@ import { TextInputComponent } from './_forms/text-input/text-input.component';
     AnswerCreateComponent,
     QuestionCreateComponent,
     TextInputComponent,
+    ConfirmDialogComponent,
   ],
   imports: [
     BrowserModule,

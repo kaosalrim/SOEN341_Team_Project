@@ -10,16 +10,17 @@ namespace API.Controllers
     [Authorize]
     public class UsersController : BaseApiController
     {
-        private readonly IUserRepository _userRepository;
-        public UsersController(IUserRepository userRepository)
+        private readonly IUnitOfWork _unitOfWork;
+
+        public UsersController(IUnitOfWork unitOfWork)
         {
-            _userRepository = userRepository;
+            _unitOfWork = unitOfWork;
         }
 
         [HttpGet]
         public async Task<ActionResult<IEnumerable<UserDto>>> GetUsers()
         {
-            var users = await _userRepository.GetMembersAsync();
+            var users = await _unitOfWork.UserRepository.GetMembersAsync();
             return Ok(users);
         }
 
@@ -27,7 +28,7 @@ namespace API.Controllers
         [HttpGet("{username}")]
         public async Task<ActionResult<UserDto>> GetUser(string username)
         {
-            return await _userRepository.GetMemberAsync(username);
+            return await _unitOfWork.UserRepository.GetMemberAsync(username);
         }
     }
 }

@@ -60,11 +60,6 @@ namespace API.Data
             return await _context.Answers.ProjectTo<AnswerDto>(_mapper.ConfigurationProvider).ToListAsync();
         }
 
-        public async Task<bool> SaveAllAsync()
-        {
-            return await _context.SaveChangesAsync() > 0;
-        }
-
         public void Update(Answer answer)
         {
             _context.Entry(answer).State = EntityState.Modified;
