@@ -72,11 +72,6 @@ namespace API.Data
             return await PagedList<QuestionDto>.CreateAsync(query, userParams.PageNumber, userParams.PageSize);
         }
 
-        public async Task<bool> SaveAllAsync()
-        {
-            return await _context.SaveChangesAsync() > 0;
-        }
-
         public void Create(Question question)
         {
             _context.Entry(question).State = EntityState.Added;

@@ -11,7 +11,6 @@ namespace API.Interfaces
         void UpdateBestAnswer(Answer answer);
         void UpdateRank(Answer Answer, int userId, bool upvote);
         void Create(Answer Answer);
-        Task<bool> SaveAllAsync();
         Task<IEnumerable<Answer>> GetAnswerEntitiesAsync();
         Task<Answer> GetAnswerEntityByIdAsync(int id);
         Task<IEnumerable<Answer>> GetAnswerEntitiesByUsernameAsync(string username);

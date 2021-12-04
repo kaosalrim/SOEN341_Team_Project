@@ -28,9 +28,7 @@ namespace API.Data
         public bool HasChanges()
         {
             _context.ChangeTracker.DetectChanges();
-            var changes = _context.ChangeTracker.HasChanges();
-
-            return changes;
+            return _context.ChangeTracker.HasChanges();
         }
     }
 }

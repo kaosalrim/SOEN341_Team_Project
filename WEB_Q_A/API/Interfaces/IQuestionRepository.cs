@@ -10,7 +10,6 @@ namespace API.Interfaces
     {
         void Update(Question question);
         void Create(Question question);
-        Task<bool> SaveAllAsync();
         Task<IEnumerable<Question>> GetQuestionEntitiesAsync();
         Task<Question> GetQuestionEntityByIdAsync(int id);
         Task<IEnumerable<Question>> GetQuestionEntitiesByUsernameAsync(string username);

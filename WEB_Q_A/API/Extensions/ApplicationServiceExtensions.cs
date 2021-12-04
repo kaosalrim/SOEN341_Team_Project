@@ -14,9 +14,9 @@ namespace API.Extensions
         {
             //service for token generation
             services.AddScoped<ITokenService, TokenService>();
-            services.AddScoped<IUserRepository, UserRepository>();
-            services.AddScoped<IQuestionRepository, QuestionRepository>();
-            services.AddScoped<IAnswerRepository, AnswerRepository>();
+            // services.AddScoped<IUserRepository, UserRepository>();
+            // services.AddScoped<IQuestionRepository, QuestionRepository>();
+            // services.AddScoped<IAnswerRepository, AnswerRepository>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<LogUserActivity>();
             services.AddAutoMapper(typeof(AutoMapperProfiles).Assembly);
